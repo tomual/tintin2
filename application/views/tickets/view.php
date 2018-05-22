@@ -1,16 +1,17 @@
 <?php $this->load->view('header') ?>
 <div class="ticket">
-    <h1>Ticket Title</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab debitis delectus dolorem doloremque eaque esse et fugiat iure, libero nulla odio odit ratione sapiente sequi sit soluta, ullam? Explicabo, fugit.</p>
+    <h1><?php echo $ticket->title ?></h1>
+    <br>
+    <?php echo $ticket->description ?>
     <h2>Details</h2>
     <table>
         <tr>
             <th>Author</th>
-            <td>tom3</td>
+            <td><?php echo $ticket->user_id ?></td>
         </tr>
         <tr>
             <th>Created at</th>
-            <td>23/05/2018 03:12PM</td>
+            <td><?php echo $ticket->created_at ?></td>
         </tr>
         <tr>
             <th>Project</th>
