@@ -1,0 +1,52 @@
+body {
+    font-family: monospace;
+    line-height: 1.5rem;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+[data-area] {
+    padding: 2rem;
+}
+
+[data-area="header"] {
+    border-bottom: 2px solid;
+}
+
+[data-area="nav"] {
+    border-bottom: 2px solid;
+}
+
+[data-area="main"] {
+    border-left: 2px solid;
+    overflow: auto;
+}
+
+.title {
+    font-size: 3rem;
+    line-height: initial;
+}
+
+td, th {
+    padding: 0.5rem;
+}
+
+h1 {background: #fff3004d;
+    display: inline-block;
+}
+
+.ticket h1 {
+    background: #00ffc94d;
+    display: inline-block;
+}
+
+.ticket table th {
+    text-align: left;
+}
