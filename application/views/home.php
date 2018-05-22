@@ -1,29 +1,21 @@
 <?php $this->load->view('header') ?>
 <h1>Welcome to tintin</h1>
 <p>Tintin is a ticketing system. It aims to be intuitive and essentialist - that is, it only has the necessities.</p>
-<h2>Recent Actions</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Action</th>
-        <th>Ticket</th>
-        <th>Description</th>
-        <th>Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Changed status</td>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Status set to <a href="">Working</a></td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td>Changed status</td>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Status set to <a href="">Working</a></td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    </tbody>
-</table>
+<h2>Get Started</h2>
+<form action="<?php echo base_url('user/signup') ?>" method="post">
+    <table>
+        <tr>
+            <td><label for="email">Email</label></td>
+            <td><input type="text" name="email" id="email"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td><input type="text" name="password" id="password"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Start"></td>
+        </tr>
+    </table>
+</form>
 <?php $this->load->view('footer') ?>
