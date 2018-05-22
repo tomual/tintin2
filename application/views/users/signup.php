@@ -1,5 +1,8 @@
 <?php $this->load->view('header') ?>
 <h1>Sign Up</h1>
+<?php if($this->session->flashdata('error')): ?>
+    <div class="error"><?php echo $this->session->flashdata('error') ?></div>
+<?php endif ?>
 <form method="post">
     <table>
         <tr>

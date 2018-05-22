@@ -18,7 +18,7 @@
     <div data-area="header">
         <div class="title"><a href="<?php echo base_url() ?>">tintin</a></div>
         <?php if ($this->user): ?>
-            <div class="menu-authed"><a href="<?php echo base_url("tickets/user/{$this->user->user_id}") ?>"><?php echo $this->user->first_name ?></a> | <a href="<?php echo base_url('logout') ?>">Log Out</a></div>
+            <div class="menu-authed"><a href="<?php echo base_url("tickets/user/{$this->user->user_id}") ?>"><?php echo $this->user->first_name ?></a> | <a href="<?php echo base_url('user/logout') ?>">Log Out</a></div>
         <?php else: ?>
             <div class="menu-guest"><a href="<?php echo base_url('user/login') ?>">Log In</a> | <a href="<?php echo base_url('user/signup') ?>">Sign Up</a></div>
         <?php endif ?>

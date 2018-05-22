@@ -7,6 +7,7 @@ class User extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('group_model');
     }
 
     public function index()
@@ -32,11 +33,30 @@ class User extends MY_Controller {
                 $data = array(
                     'user_id' => 1,
                     'email' => $this->input->post('email'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                    'password' => $this->input->post('password'),
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
                 );
-                $user_id = $this->user_model->create($data);
+                $user_unique_id = $this->user_model->create($data);
+                if($user_unique_id) {
+                    $user = $this->user_model->log_in($data['email'], $data['password']);
+                    if($user) {
+                        $this->session->set_userdata('user_id', $user->user_id);
+                        $this->session->set_userdata('user', $user);
+                        $group_id = $this->group_model->create($user_unique_id, $this->input->post('name'));
+                        if($group_id) {
+                            $user->group_id = $group_id;
+                            $this->user_model->update($user);
+                            redirect('/');
+                        } else {
+                            $this->session->set_flashdata('error', 'There was an unknown issue creating your group.');
+                        }
+                    } else {
+                        $this->session->set_flashdata('error', 'There was an unknown issue logging you in.');
+                    }
+                } else {
+                    $this->session->set_flashdata('error', 'There was an unknown issue signing you up.');
+                }
             }
         }
         $this->load->view('users/signup');
@@ -59,12 +79,18 @@ class User extends MY_Controller {
                 if($user) {
                     $this->session->set_userdata('user_id', $user->user_id);
                     $this->session->set_userdata('user', $user);
-                    redirect(base_url());
+                    redirect('/');
                 } else {
                     $this->session->set_flashdata('error', 'Invalid login.');
                 }
             }
         }
         $this->load->view('users/login');
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('/');
     }
 }
