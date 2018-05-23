@@ -23,7 +23,9 @@
         </tr>
         <tr>
             <td></td>
-            <td><button>Edit Ticket</button></td>
+            <td>
+                <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>"><button>Edit Ticket</button></a>
+            </td>
         </tr>
     </table>
 
@@ -50,9 +52,25 @@
     </form>
     <h2>Revisions</h2>
     <ul>
-        <li>Status from <a href="">Input</a> to <a href="">Working</a>
-            <br>by <a href="">tom3</a> at 12/05/2018 12:00PM
-        </li>
+        <?php $cursor = $ticket ?>
+        <?php foreach ($revisions as $revision): ?>
+            <li>
+                <div><?php echo $revision->updated_by ?> at <?php echo $revision->updated_at ?></div>
+                <?php unset($revision->updated_by) ?>
+                <?php unset($revision->updated_at) ?>
+                <?php unset($revision->id) ?>
+                <?php foreach ($revision as $key => $value): ?>
+                    <?php if ($revision->{$key} != $cursor->{$key}): ?>
+                        <?php if ($key != 'description'): ?>
+                        <?php echo ucfirst($key) ?> changed from <?php echo $revision->{$key} ?> to <?php echo $cursor->{$key} ?><br>
+                        <?php else: ?>
+                            Description changed<br>
+                        <?php endif ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </li>
+            <?php $cursor = $revision ?>
+        <?php endforeach ?>
     </ul>
 </div>
 <?php $this->load->view('footer') ?>
