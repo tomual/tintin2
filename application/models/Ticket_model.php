@@ -8,6 +8,7 @@ class Ticket_model extends CI_Model {
             'ticket_id' => $this->get_next_ticket_id($this->user->group_id),
             'title' => $title,
             'description' => $description,
+            'status_id' => 1,
             'user_id' => $this->user->user_id,
             'group_id' => $this->user->group_id,
         );
@@ -18,6 +19,10 @@ class Ticket_model extends CI_Model {
     public function update($ticket_id, $group_id, $data)
     {
         $revision = (array) $this->get($ticket_id, $group_id);
+
+        if($data['status_id'] == 4) {
+            $data['worker_id'] = $this->user->user_id;
+        }
 
         $this->db->set($data);
         $this->db->where('ticket_id', $ticket_id);

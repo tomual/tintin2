@@ -19,7 +19,11 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td>Working</td>
+            <td><?php echo $ticket->status_id ?></td>
+        </tr>
+        <tr>
+            <th>Worker</th>
+            <td><?php echo $ticket->worker_id ?? '-' ?></td>
         </tr>
         <tr>
             <td></td>
@@ -35,8 +39,10 @@
             <tr>
                 <td><label for="">Status</label></td>
                 <td>
-                    <select name="status" id="status">
-                        <option value="1">Working</option>
+                    <select name="status_id" id="status_id">
+                        <?php foreach ($statuses as $status): ?>
+                            <option value="<?php echo $status->status_id ?>"><?php echo $status->label ?></option>
+                        <?php endforeach ?>
                     </select>
                 </td>
             </tr>

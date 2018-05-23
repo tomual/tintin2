@@ -10,10 +10,23 @@
         <tr>
             <td><label for="description">Description</label></td>
             <td>
-                <textarea name="description" id="description" cols="30" rows="5"><?php echo set_value('description', null) ?? $ticket->description ?? null?></textarea>
+                <textarea name="description" id="description" cols="30" rows="5"><?php echo set_value('description', null) ?? $ticket->description ?? null ?></textarea>
                 <?php echo form_error('description') ?>
             </td>
         </tr>
+        <?php if (!empty($statuses)): ?>
+            <tr>
+                <td><label for="status">Status</label></td>
+                <td>
+                    <select name="status_id" id="status_id">
+                        <?php foreach ($statuses as $status): ?>
+                            <option value="<?php echo $status->status_id ?>"><?php echo $status->label ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php echo form_error('status') ?>
+                </td>
+            </tr>
+        <?php endif ?>
         <tr>
             <td></td>
             <td><input type="submit" value="Create"></td>

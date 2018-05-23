@@ -7,6 +7,7 @@ class Ticket extends MY_Controller
     {
         parent::__construct();
         $this->load->model('ticket_model');
+        $this->load->model('status_model');
     }
 
     public function index()
@@ -18,7 +19,8 @@ class Ticket extends MY_Controller
     {
         $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
         $revisions = $this->ticket_model->get_revisions($ticket_id, $this->user->group_id);
-        $this->load->view('tickets/view', compact('ticket', 'revisions'));
+        $statuses = $this->status_model->get_all($this->user->group_id);
+        $this->load->view('tickets/view', compact('ticket', 'revisions', 'statuses'));
     }
 
     public function list()
@@ -57,17 +59,22 @@ class Ticket extends MY_Controller
     public function edit($ticket_id)
     {
         $this->load->helper(array('form', 'url'));
+
         $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
+        $statuses = $this->status_model->get_all($this->user->group_id);
+
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('title', 'Title', 'required');
             $this->form_validation->set_rules('description', 'Description', 'required');
+            $this->form_validation->set_rules('status_id', 'Status', 'required');
 
             if ($this->form_validation->run() !== FALSE) {
                 $data = array(
                     'title' => $this->input->post('title'),
                     'description' => $this->input->post('description'),
+                    'status_id' => $this->input->post('status_id'),
                 );
                 $has_difference = false;
                 foreach($data as $key => $value) {
@@ -87,6 +94,6 @@ class Ticket extends MY_Controller
                 }
             }
         }
-        $this->load->view('tickets/edit', compact('ticket'));
+        $this->load->view('tickets/edit', compact('ticket', 'statuses'));
     }
 }
