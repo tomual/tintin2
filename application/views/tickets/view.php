@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <th>Project</th>
-            <td>tintin2</td>
+            <td><?php echo $ticket->project_id ?? '-' ?></td>
         </tr>
         <tr>
             <th>Status</th>

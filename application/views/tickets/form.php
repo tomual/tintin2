@@ -14,6 +14,21 @@
                 <?php echo form_error('description') ?>
             </td>
         </tr>
+        <tr>
+            <td><label for="project_id">Project</label></td>
+            <td>
+                <?php if (!empty($statuses)): ?>
+                <select name="project_id" id="project_id">
+                    <?php foreach ($projects as $project): ?>
+                        <option value="<?php echo $project->project_id ?>"><?php echo $project->label ?></option>
+                    <?php endforeach ?>
+                </select>
+                <?php echo form_error('project_id') ?>
+                <?php else: ?>
+                No projects set - <a href="<?php echo base_url('project/list') ?>">Manage projects</a>
+                <?php endif ?>
+            </td>
+        </tr>
         <?php if (!empty($statuses)): ?>
             <tr>
                 <td><label for="status">Status</label></td>
@@ -23,7 +38,7 @@
                             <option value="<?php echo $status->status_id ?>"><?php echo $status->label ?></option>
                         <?php endforeach ?>
                     </select>
-                    <?php echo form_error('status') ?>
+                    <?php echo form_error('status_id') ?>
                 </td>
             </tr>
         <?php endif ?>

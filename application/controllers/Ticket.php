@@ -8,6 +8,7 @@ class Ticket extends MY_Controller
         parent::__construct();
         $this->load->model('ticket_model');
         $this->load->model('status_model');
+        $this->load->model('project_model');
     }
 
     public function index()
@@ -25,12 +26,21 @@ class Ticket extends MY_Controller
 
     public function list()
     {
-        $this->load->view('tickets/list');
+        if($this->input->get()) {
+            $tickets = $this->ticket_model->query($this->user->group_id, $this->input->get());
+        } else {
+            $tickets = $this->ticket_model->get_all($this->user->group_id);
+        }
+        $statuses = $this->status_model->get_all($this->user->group_id);
+        $this->load->view('tickets/list', compact('tickets', 'statuses'));
     }
 
     public function new()
     {
         $this->load->helper(array('form', 'url'));
+
+        $projects = $this->project_model->get_all($this->user->group_id);
+
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
@@ -53,7 +63,7 @@ class Ticket extends MY_Controller
                 }
             }
         }
-        $this->load->view('tickets/new');
+        $this->load->view('tickets/new', compact('projects'));
     }
 
     public function edit($ticket_id)

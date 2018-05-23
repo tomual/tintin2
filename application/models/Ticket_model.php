@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ticket_model extends CI_Model {
 
+    private $fields = array(
+        'title',
+        'description',
+        'user_id',
+        'status_id',
+        'worker_id',
+        'created_at',
+        'updated_at'
+    );
+
     public function create($title, $description) {
         $data = array(
             'ticket_id' => $this->get_next_ticket_id($this->user->group_id),
@@ -44,6 +54,27 @@ class Ticket_model extends CI_Model {
         $this->db->from('tickets');
         $ticket = $this->db->get()->first_row();
         return $ticket;
+    }
+
+    public function get_all($group_id)
+    {
+        $this->db->where('group_id', $group_id);
+        $this->db->from('tickets');
+        $tickets = $this->db->get()->result();
+        return $tickets;
+    }
+
+    public function query($group_id, $query)
+    {
+        $this->db->where('group_id', $group_id);
+        foreach ($this->fields as $field) {
+            if(!empty($query[$field])) {
+                $this->db->where($field, $query[$field]);
+            }
+        }
+        $this->db->from('tickets');
+        $tickets = $this->db->get()->result();
+        return $tickets;
     }
 
     public function get_revisions($ticket_id, $group_id)

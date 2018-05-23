@@ -28,7 +28,7 @@
             <ul>
                 <li><a href="<?php echo base_url() ?>">Home</a></li>
                 <li><a href="<?php echo base_url('ticket/new') ?>">New Ticket</a></li>
-                <li><a href="">Tickets List</a></li>
+                <li><a href="<?php echo base_url('ticket/list') ?>">Tickets List</a></li>
                 <li><a href="">Search</a></li>
                 <li><a href="">Settings</a></li>
             </ul>

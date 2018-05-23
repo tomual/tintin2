@@ -1,10 +1,12 @@
 <?php $this->load->view('header') ?>
 <h1>Tickets List</h1>
 <div class="filter">
-    <form action="">
+    <form>
         <label for="status">Status</label>
-        <select name="status" id="status">
-            <option value="1">Working</option>
+        <select name="status_id" id="status_id">
+            <?php foreach ($statuses as $status): ?>
+                <option value="<?php echo $status->status_id ?>"><?php echo $status->label ?></option>
+            <?php endforeach ?>
         </select>
         <label for="status">Project</label>
         <select name="project" id="project">
@@ -24,48 +26,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
-    <tr>
-        <td><a href="">Connect to Koi Auth API</a></td>
-        <td>Working</td>
-        <td>tintin2</td>
-        <td>12/05/2018 3:19PM</td>
-        <td>12/05/2018 3:19PM</td>
-    </tr>
+    <?php foreach ($tickets as $ticket): ?>
+        <tr>
+            <td><a href="<?php echo base_url("ticket/view/{$ticket->ticket_id}") ?>"><?php echo $ticket->title ?></a></td>
+            <td><?php echo $ticket->status_id ?></td>
+            <td><?php echo $ticket->project_id ?? '-' ?></td>
+            <td><?php echo $ticket->created_at ?></td>
+            <td><?php echo $ticket->updated_at ?></td>
+        </tr>
+    <?php endforeach ?>
     </tbody>
 </table>
 <?php $this->load->view('footer') ?>
