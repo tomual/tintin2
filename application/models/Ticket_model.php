@@ -8,6 +8,7 @@ class Ticket_model extends CI_Model {
         'description',
         'user_id',
         'status_id',
+        'project_id',
         'worker_id',
         'created_at',
         'updated_at'

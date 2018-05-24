@@ -50,4 +50,16 @@ class Project_model extends CI_Model {
         return $projects;
     }
 
+
+    public function get_label($project_id, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->where('project_id', $project_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->from('projects');
+        $project = $this->db->get()->first_row();
+        return $project->label ?? null;
+    }
 }

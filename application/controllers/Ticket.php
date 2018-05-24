@@ -17,8 +17,7 @@ class Ticket extends MY_Controller
     {
         $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
         $revisions = $this->ticket_model->get_revisions($ticket_id, $this->user->group_id);
-        $statuses = $this->status_model->get_all($this->user->group_id);
-        $this->load->view('tickets/view', compact('ticket', 'revisions', 'statuses'));
+        $this->load->view('tickets/view', compact('ticket', 'revisions'));
     }
 
     public function list()
@@ -28,15 +27,12 @@ class Ticket extends MY_Controller
         } else {
             $tickets = $this->ticket_model->get_all($this->user->group_id);
         }
-        $statuses = $this->status_model->get_all($this->user->group_id);
-        $this->load->view('tickets/list', compact('tickets', 'statuses'));
+        $this->load->view('tickets/list', compact('tickets'));
     }
 
     public function new()
     {
         $this->load->helper(array('form', 'url'));
-
-        $projects = $this->project_model->get_all($this->user->group_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -61,7 +57,7 @@ class Ticket extends MY_Controller
                 }
             }
         }
-        $this->load->view('tickets/new', compact('projects'));
+        $this->load->view('tickets/new');
     }
 
     public function edit($ticket_id)
@@ -69,8 +65,6 @@ class Ticket extends MY_Controller
         $this->load->helper(array('form', 'url'));
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
-        $statuses = $this->status_model->get_all($this->user->group_id);
-        $projects = $this->project_model->get_all($this->user->group_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -104,6 +98,6 @@ class Ticket extends MY_Controller
                 }
             }
         }
-        $this->load->view('tickets/edit', compact('ticket', 'statuses', 'projects'));
+        $this->load->view('tickets/edit', compact('ticket'));
     }
 }

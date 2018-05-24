@@ -31,4 +31,24 @@ class User_model extends CI_Model {
         }
         return null;
     }
+
+    public function get_first_name($user_id, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->where('user_id', $user_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->from('users');
+        $user = $this->db->get()->first_row();
+        return $user->first_name ?? null;
+    }
+
+    public function get_all($group_id)
+    {
+        $this->db->where('group_id', $group_id);
+        $this->db->from('users');
+        $users = $this->db->get()->result();
+        return $users;
+    }
 }

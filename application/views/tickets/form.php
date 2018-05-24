@@ -17,9 +17,9 @@
         <tr>
             <td><label for="project_id">Project</label></td>
             <td>
-                <?php if (!empty($projects)): ?>
+                <?php if (!empty($this->projects)): ?>
                 <select name="project_id" id="project_id">
-                    <?php foreach ($projects as $project): ?>
+                    <?php foreach ($this->projects as $project): ?>
                         <option value="<?php echo $project->project_id ?>"><?php echo $project->label ?></option>
                     <?php endforeach ?>
                 </select>
@@ -29,12 +29,12 @@
                 <?php endif ?>
             </td>
         </tr>
-        <?php if (!empty($statuses)): ?>
+        <?php if ($this->router->fetch_method() != 'new'): ?>
             <tr>
                 <td><label for="status">Status</label></td>
                 <td>
                     <select name="status_id" id="status_id">
-                        <?php foreach ($statuses as $status): ?>
+                        <?php foreach ($this->statuses as $status): ?>
                             <option value="<?php echo $status->status_id ?>"><?php echo $status->label ?></option>
                         <?php endforeach ?>
                     </select>

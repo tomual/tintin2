@@ -20,4 +20,16 @@ class Status_model extends CI_Model {
         return $statuses;
     }
 
+    public function get_label($status_id, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->where('status_id', $status_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->from('statuses');
+        $status = $this->db->get()->first_row();
+        return $status->label ?? null;
+    }
+
 }

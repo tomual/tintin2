@@ -7,7 +7,7 @@
     <table>
         <tr>
             <th>Author</th>
-            <td><?php echo $ticket->user_id ?></td>
+            <td><?php echo get_user_first_name($ticket->user_id) ?></td>
         </tr>
         <tr>
             <th>Created at</th>
@@ -15,20 +15,22 @@
         </tr>
         <tr>
             <th>Project</th>
-            <td><?php echo $ticket->project_id ?? '-' ?></td>
+            <td><?php echo get_project_label($ticket->project_id) ?? '-' ?></td>
         </tr>
         <tr>
             <th>Status</th>
-            <td><?php echo $ticket->status_id ?></td>
+            <td><?php echo get_status_label($ticket->status_id) ?></td>
         </tr>
         <tr>
             <th>Worker</th>
-            <td><?php echo $ticket->worker_id ?? '-' ?></td>
+            <td><?php echo get_user_first_name($ticket->worker_id) ?? '-' ?></td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>"><button>Edit Ticket</button></a>
+                <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>">
+                    <button>Edit Ticket</button>
+                </a>
             </td>
         </tr>
     </table>
@@ -58,25 +60,46 @@
     </form>
     <h2>Revisions</h2>
     <ul>
-        <?php $cursor = $ticket ?>
-        <?php foreach ($revisions as $revision): ?>
-            <li>
-                <div><?php echo $revision->updated_by ?> at <?php echo $revision->updated_at ?></div>
-                <?php unset($revision->updated_by) ?>
-                <?php unset($revision->updated_at) ?>
-                <?php unset($revision->id) ?>
-                <?php foreach ($revision as $key => $value): ?>
-                    <?php if ($revision->{$key} != $cursor->{$key}): ?>
-                        <?php if ($key != 'description'): ?>
-                        <?php echo ucfirst($key) ?> changed from <?php echo $revision->{$key} ?> to <?php echo $cursor->{$key} ?><br>
-                        <?php else: ?>
-                            Description changed<br>
-                        <?php endif ?>
-                    <?php endif ?>
-                <?php endforeach ?>
-            </li>
-            <?php $cursor = $revision ?>
-        <?php endforeach ?>
+        <li>
+            <div>
+                <?php
+                $cursor = $ticket;
+                $ignore = array('id', 'updated_at', 'updated_by');
+                foreach ($revisions as $revision) {
+                    echo get_user_first_name($revision->updated_by) . " at " . $revision->updated_at . "<br>";
+                    foreach ($revision as $key => $value) {
+                        if (!in_array($key, $ignore) && $revision->{$key} != $cursor->{$key}) {
+                            switch ($key) {
+                                case 'description':
+                                    echo "Description changed";
+                                    break;
+                                case 'project_id':
+                                    $before = $this->project_model->get_label($revision->{$key}) ?? 'None';
+                                    $after = $this->project_model->get_label($cursor->{$key});
+                                    echo "Project changed from <b>$before</b> to <b>$after</b>";
+                                    break;
+                                case 'status_id':
+                                    $before = get_status_label($revision->{$key}) ?? 'None';
+                                    $after = get_status_label($cursor->{$key});
+                                    echo "Status changed from <b>$before</b> to <b>$after</b>";
+                                    break;
+                                case 'worker_id':
+                                    $before = get_user_first_name($revision->{$key}) ?? 'Nobody';
+                                    $after = get_user_first_name($cursor->{$key});
+                                    echo "Worker changed from <b>$before</b> to <b>$after</b>";
+                                    break;
+                                default:
+                                    echo ucfirst($key) . " changed from {$revision->{$key}} to {$cursor->{$key}}<br>";
+                                    break;
+                            }
+                            echo "<br>";
+                        }
+                    }
+                    $cursor = $revision;
+                }
+                ?>
+            </div>
+        </li>
     </ul>
 </div>
 <?php $this->load->view('footer') ?>
