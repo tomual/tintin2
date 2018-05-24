@@ -17,7 +17,7 @@
         <tr>
             <td><label for="project_id">Project</label></td>
             <td>
-                <?php if (!empty($statuses)): ?>
+                <?php if (!empty($projects)): ?>
                 <select name="project_id" id="project_id">
                     <?php foreach ($projects as $project): ?>
                         <option value="<?php echo $project->project_id ?>"><?php echo $project->label ?></option>

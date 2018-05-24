@@ -13,12 +13,13 @@ class Ticket_model extends CI_Model {
         'updated_at'
     );
 
-    public function create($title, $description) {
+    public function create($title, $description, $project_id) {
         $data = array(
             'ticket_id' => $this->get_next_ticket_id($this->user->group_id),
             'title' => $title,
             'description' => $description,
             'status_id' => 1,
+            'project_id' => $project_id,
             'user_id' => $this->user->user_id,
             'group_id' => $this->user->group_id,
         );

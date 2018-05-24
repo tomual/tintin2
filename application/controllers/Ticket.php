@@ -6,9 +6,6 @@ class Ticket extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('ticket_model');
-        $this->load->model('status_model');
-        $this->load->model('project_model');
     }
 
     public function index()
@@ -50,7 +47,8 @@ class Ticket extends MY_Controller
             if ($this->form_validation->run() !== FALSE) {
                 $title = $this->input->post('title');
                 $description = $this->input->post('description');
-                $id = $this->ticket_model->create($title, $description);
+                $project_id = $this->input->post('project_id');
+                $id = $this->ticket_model->create($title, $description, $project_id);
                 if ($id) {
                     $ticket = $this->ticket_model->get_by_unique_id($id);
                     if ($id) {
@@ -72,6 +70,7 @@ class Ticket extends MY_Controller
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
         $statuses = $this->status_model->get_all($this->user->group_id);
+        $projects = $this->project_model->get_all($this->user->group_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -85,6 +84,7 @@ class Ticket extends MY_Controller
                     'title' => $this->input->post('title'),
                     'description' => $this->input->post('description'),
                     'status_id' => $this->input->post('status_id'),
+                    'project_id' => $this->input->post('project_id')
                 );
                 $has_difference = false;
                 foreach($data as $key => $value) {
@@ -104,6 +104,6 @@ class Ticket extends MY_Controller
                 }
             }
         }
-        $this->load->view('tickets/edit', compact('ticket', 'statuses'));
+        $this->load->view('tickets/edit', compact('ticket', 'statuses', 'projects'));
     }
 }
