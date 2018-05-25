@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Create"></td>
+            <td><input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-link">Cancel</a></td>
         </tr>
     </table>
 </form>

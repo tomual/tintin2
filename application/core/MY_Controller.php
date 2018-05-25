@@ -10,15 +10,16 @@ class MY_Controller extends CI_Controller
         if ($this->session->userdata('user_id')) {
             $this->user = $this->session->userdata('user');
         }
-        if (empty($this->statuses)) {
-            $this->statuses = $this->status_model->get_all($this->user->group_id);
-        }
-        if (empty($this->users)) {
-            $this->users = $this->user_model->get_all($this->user->group_id);
-        }
-        if (empty($this->projects)) {
-            $this->projects = $this->project_model->get_all($this->user->group_id);
+        if($this->user) {
+            if (empty($this->statuses)) {
+                $this->statuses = $this->status_model->get_all($this->user->group_id);
+            }
+            if (empty($this->users)) {
+                $this->users = $this->user_model->get_all($this->user->group_id);
+            }
+            if (empty($this->projects)) {
+                $this->projects = $this->project_model->get_all($this->user->group_id);
+            }
         }
     }
-
 }

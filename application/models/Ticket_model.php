@@ -34,13 +34,18 @@ class Ticket_model extends CI_Model {
 
         if($data['status_id'] == 4) {
             $data['worker_id'] = $this->user->user_id;
+        } elseif($data['status_id'] != 5) {
+            $data['worker_id'] = null;
         }
+
+        $revision['comment'] = $data['comment'];
+        unset($data['comment']);
 
         $this->db->set($data);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->where('group_id', $group_id);
         $this->db->update('tickets');
-        if($this->db->affected_rows()) {
+        if($this->db->affected_rows() || $revision['comment']) {
             $revision['updated_by'] = $this->user->user_id;
             unset($revision['id']);
             $this->db->insert('revisions', $revision);
@@ -62,6 +67,7 @@ class Ticket_model extends CI_Model {
     {
         $this->db->where('group_id', $group_id);
         $this->db->from('tickets');
+        $this->db->order_by('created_at', 'desc');
         $tickets = $this->db->get()->result();
         return $tickets;
     }
@@ -84,6 +90,7 @@ class Ticket_model extends CI_Model {
         $this->db->where('group_id', $group_id);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->from('revisions');
+        $this->db->order_by('updated_at', 'desc');
         $revisions = $this->db->get()->result();
         return $revisions;
     }
