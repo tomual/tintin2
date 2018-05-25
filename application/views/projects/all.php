@@ -18,7 +18,7 @@
             <td><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>"><?php echo $project->label ?></a></td>
             <td>
                 <div class="progressbar">
-                    <div></div>
+                    <div style="width:<?php echo $project->complete / $project->tickets * 100 ?>%"></div>
                 </div>
             </td>
             <td><?php echo $project->description ?></td>

@@ -33,6 +33,27 @@ class Project_model extends CI_Model {
         return null;
     }
 
+    public function update($project_id, $group_id, $data)
+    {
+        $this->db->set($data);
+        $this->db->where('project_id', $project_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->update('projects');
+        return $this->db->affected_rows();
+    }
+
+    public function delete($project_id, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->set('removed', 'Y');
+        $this->db->where('project_id', $project_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->update('projects');
+        return $this->db->affected_rows();
+    }
+
     public function get($project_id, $group_id = null)
     {
         if(!$group_id) {
@@ -45,10 +66,28 @@ class Project_model extends CI_Model {
         return $project;
     }
 
-    public function get_all($group_id)
+    public function get_all($group_id, $active = false)
     {
         $this->db->where('group_id', $group_id);
+        if($active) {
+            $this->db->where('removed', 'N');
+        }
         $this->db->from('projects');
+        $projects = $this->db->get()->result();
+        return $projects;
+    }
+
+    public function get_all_with_ticket_count($group_id, $active = false)
+    {
+        $this->db->select('projects.*, COUNT(*) as tickets, complete.count as complete');
+        $this->db->where('projects.group_id', $group_id);
+        if($active) {
+            $this->db->where('removed', 'N');
+        }
+        $this->db->from('projects');
+        $this->db->join('(SELECT * FROM tickets WHERE status_id != 6) tickets', 'tickets.project_id = projects.project_id AND tickets.group_id = projects.group_id');
+        $this->db->join('(SELECT project_id, group_id, COUNT(*) AS count FROM tickets WHERE status_id = 5 AND group_id = 3 GROUP BY project_id) complete', 'complete.project_id = projects.project_id AND complete.group_id = projects.group_id');
+        $this->db->group_by('project_id');
         $projects = $this->db->get()->result();
         return $projects;
     }

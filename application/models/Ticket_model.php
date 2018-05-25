@@ -81,6 +81,7 @@ class Ticket_model extends CI_Model {
             }
         }
         $this->db->from('tickets');
+        $this->db->order_by('created_at', 'desc');
         $tickets = $this->db->get()->result();
         return $tickets;
     }

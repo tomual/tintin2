@@ -21,7 +21,7 @@ class Project extends MY_Controller
 
     public function all()
     {
-        $projects = $this->project_model->get_all($this->user->group_id);
+        $projects = $this->project_model->get_all_with_ticket_count($this->user->group_id, true);
         $this->load->view('projects/all', compact('projects'));
     }
 
@@ -61,20 +61,17 @@ class Project extends MY_Controller
         $this->load->helper(array('form', 'url'));
 
         $project = $this->project_model->get($project_id, $this->user->group_id);
-        $statuses = $this->status_model->get_all($this->user->group_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('label', 'Label', 'required');
             $this->form_validation->set_rules('description', 'Description', 'required');
-            $this->form_validation->set_rules('status_id', 'Status', 'required');
 
             if ($this->form_validation->run() !== FALSE) {
                 $data = array(
                     'label' => $this->input->post('label'),
                     'description' => $this->input->post('description'),
-                    'status_id' => $this->input->post('status_id'),
                 );
                 $has_difference = false;
                 foreach ($data as $key => $value) {
@@ -85,7 +82,7 @@ class Project extends MY_Controller
                 if ($has_difference) {
                     $updated = $this->project_model->update($project_id, $this->user->group_id, $data);
                     if ($updated) {
-                        redirect("project/view/{$project_id}");
+                        redirect("ticket/project/{$project_id}");
                     } else {
                         $this->session->set_flashdata('error', 'There was an unknown error updating your project.');
                     }
@@ -95,5 +92,17 @@ class Project extends MY_Controller
             }
         }
         $this->load->view('projects/edit', compact('project', 'statuses'));
+    }
+
+    public function delete($project_id)
+    {
+        if ($this->input->method() == 'post') {
+            $deleted = $this->project_model->delete($project_id);
+            if ($deleted) {
+                redirect("project/all");
+            } else {
+                $this->session->set_flashdata('error', 'There was an unknown error deleting your project.');
+            }
+        }
     }
 }

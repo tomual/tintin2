@@ -258,7 +258,6 @@ hr {
 
 .progressbar > div {
     background-color: orange;
-    width: 40%; /* Adjust with JavaScript */
     height: 20px;
     border-right: 2px solid #000;
 }

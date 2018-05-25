@@ -33,8 +33,8 @@ class Ticket extends MY_Controller
     public function project($project_id)
     {
         $project = $this->project_model->get($project_id);
-        $tickets = $this->ticket_model->query($this->user->group_id, compact($project_id));
-        $this->load->view('tickets/all', compact('tickets', 'project'));
+        $tickets = $this->ticket_model->query($this->user->group_id, compact('project_id'));
+        $this->load->view('tickets/project', compact('tickets', 'project'));
     }
 
     public function new()
