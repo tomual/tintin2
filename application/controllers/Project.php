@@ -19,10 +19,10 @@ class Project extends MY_Controller
         $this->load->view('projects/view', compact('project'));
     }
 
-    public function list()
+    public function all()
     {
         $projects = $this->project_model->get_all($this->user->group_id);
-        $this->load->view('projects/list', compact('projects'));
+        $this->load->view('projects/all', compact('projects'));
     }
 
     public function new()
