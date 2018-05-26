@@ -1,21 +1,40 @@
 <?php $this->load->view('header') ?>
 <h1>Welcome to tintin</h1>
 <p>Tintin is a ticketing system. It aims to be intuitive and essentialist - that is, it only has the necessities.</p>
-<h2>Get Started</h2>
-<form action="<?php echo base_url('user/signup') ?>" method="post">
-    <table>
+<h3 class="mt-7">Tickets Summary</h3>
+<div class="row row-cards">
+    <?php foreach ($summary as $count): ?>
+        <div class="summary">
+            <div class="card pt-3">
+                <div class="card-body p-3 text-center">
+                    <div class="h1 m-0"><a href="<?php echo base_url("ticket/status/{$count->status_id}") ?>" class="text-inherit"><?php echo $count->count ?></a></div>
+                    <div class="text-muted mb-4"><a href="<?php echo base_url("ticket/status/{$count->status_id}") ?>" class="text-inherit"><?php echo get_status_label($count->status_id) ?></a></div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+<h3 class="mt-5">Newest Tickets</h3>
+<table class="table table-hover mt-6">
+    <thead>
+    <tr>
+        <th>Ticket</th>
+        <th>Status</th>
+        <th>Project</th>
+        <th>Created</th>
+        <th>Modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($new as $ticket): ?>
         <tr>
-            <td><label class="form-label" for="email">Email</label></td>
-            <td><input type="text" class="form-control" name="email" id="email"></td>
+            <td><a href="<?php echo base_url("ticket/view/{$ticket->ticket_id}") ?>"><?php echo $ticket->title ?></a></td>
+            <td><?php echo get_status_label($ticket->status_id) ?></td>
+            <td><?php echo get_project_label($ticket->project_id) ?? '-' ?></td>
+            <td><?php echo date('M j, Y', strtotime($ticket->created_at)) ?></td>
+            <td><?php echo date('M j, Y', strtotime($ticket->updated_at)) ?></td>
         </tr>
-        <tr>
-            <td><label class="form-label" for="password">Password</label></td>
-            <td><input type="text" class="form-control" name="password" id="password"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Start" class="btn btn-primary"></td>
-        </tr>
-    </table>
-</form>
+    <?php endforeach ?>
+    </tbody>
+</table>
 <?php $this->load->view('footer') ?>

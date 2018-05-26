@@ -37,6 +37,13 @@ class Ticket extends MY_Controller
         $this->load->view('tickets/project', compact('tickets', 'project'));
     }
 
+    public function status($status_id)
+    {
+        $status = $this->status_model->get($status_id);
+        $tickets = $this->ticket_model->query($this->user->group_id, compact('status_id'));
+        $this->load->view('tickets/status', compact('tickets', 'status'));
+    }
+
     public function new()
     {
         $this->load->helper(array('form', 'url'));
