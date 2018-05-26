@@ -1,4 +1,4 @@
-<table border="1" class="mt-2">
+<table class="table table-hover mt-2">
     <thead>
     <tr>
         <th>Ticket</th>

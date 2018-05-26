@@ -6,14 +6,14 @@
 <form method="post">
     <table>
         <tr>
-            <td><label for="email">Email</label></td>
+            <td><label class="form-label" for="email">Email</label></td>
             <td>
-                <input type="text" name="email" id="email" value="<?php echo set_value('email') ?>">
+                <input type="text" class="form-control" name="email" id="email" value="<?php echo set_value('email') ?>">
                 <?php echo form_error('email') ?>
             </td>
         </tr>
         <tr>
-            <td><label for="password">Password</label></td>
+            <td><label class="form-label" for="password">Password</label></td>
             <td>
                 <input type="password" name="password" id="password" value="<?php echo set_value('password') ?>">
                 <?php echo form_error('password') ?>

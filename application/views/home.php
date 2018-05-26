@@ -5,12 +5,12 @@
 <form action="<?php echo base_url('user/signup') ?>" method="post">
     <table>
         <tr>
-            <td><label for="email">Email</label></td>
-            <td><input type="text" name="email" id="email"></td>
+            <td><label class="form-label" for="email">Email</label></td>
+            <td><input type="text" class="form-control" name="email" id="email"></td>
         </tr>
         <tr>
-            <td><label for="password">Password</label></td>
-            <td><input type="text" name="password" id="password"></td>
+            <td><label class="form-label" for="password">Password</label></td>
+            <td><input type="text" class="form-control" name="password" id="password"></td>
         </tr>
         <tr>
             <td></td>
