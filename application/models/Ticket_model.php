@@ -113,4 +113,43 @@ class Ticket_model extends CI_Model {
         $this->db->from('tickets');
         return $this->db->get()->num_rows() + 1;
     }
+
+    public function get_updated($limit, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->where('group_id', $group_id);
+        $this->db->from('tickets');
+        $this->db->limit($limit);
+        $this->db->order_by('updated_at', 'desc');
+        $tickets = $this->db->get()->result();
+        return $tickets;
+    }
+
+    public function get_new($limit, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->where('group_id', $group_id);
+        $this->db->from('tickets');
+        $this->db->limit($limit);
+        $this->db->order_by('created_at', 'desc');
+        $tickets = $this->db->get()->result();
+        return $tickets;
+    }
+
+    public function get_counts_by_status($group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->select('status_id, COUNT(status_id) as count');
+        $this->db->where('group_id', $group_id);
+        $this->db->from('tickets');
+        $this->db->group_by('status_id');
+        $counts = $this->db->get()->result();
+        return $counts;
+    }
 }

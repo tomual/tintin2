@@ -24,7 +24,7 @@
 <body>
 <div class="wrapper">
     <div class="right">
-        <div class="title">
+        <div class="title o-auto">
             <svg class="mt-9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
                 <g>
                 </g>
@@ -67,36 +67,14 @@
                     <div class="hide-scroll-child">
                         <table class="table card-table">
                             <tbody>
-                            <tr>
-                                <td>
-                                    Google Chrome
-                                    <div class="small text-muted">Working &middot; Last updated 28 Mar, 2018 9:22PM</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Google Chrome
-                                    <div class="small text-muted">Working &middot; Last updated 28 Mar, 2018 9:22PM</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Google Chrome
-                                    <div class="small text-muted">Working &middot; Last updated 28 Mar, 2018 9:22PM</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Google Chrome
-                                    <div class="small text-muted">Working &middot; Last updated 28 Mar, 2018 9:22PM</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Google Chrome
-                                    <div class="small text-muted">Working &middot; Last updated 28 Mar, 2018 9:22PM</div>
-                                </td>
-                            </tr>
+                            <?php foreach($this->updated as $updated_ticket): ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo base_url("ticket/view/{$updated_ticket->ticket_id}") ?>" class="text-inherit"><?php echo $updated_ticket->title ?></a>
+                                        <div class="small text-muted"><?php echo get_status_label($updated_ticket->status_id) ?> &middot; Last updated <?php echo time_elapsed_string($updated_ticket->updated_at) ?></div>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
                             </tbody>
                         </table>
                     </div>

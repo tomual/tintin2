@@ -1,3 +1,9 @@
 .table-hover tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.02);
 }
+.align-super {
+    vertical-align: super;
+}
+h1 {
+    margin-bottom: 2rem;
+}

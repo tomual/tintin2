@@ -20,6 +20,9 @@ class MY_Controller extends CI_Controller
             if (empty($this->projects)) {
                 $this->projects = $this->project_model->get_all($this->user->group_id);
             }
+            if (empty($this->updated)) {
+                $this->updated = $this->ticket_model->get_updated(5);
+            }
         }
     }
 }

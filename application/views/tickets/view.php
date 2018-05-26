@@ -1,7 +1,7 @@
 <?php $this->load->view('header') ?>
 <div class="ticket">
     <h1 class="d-inline"><small class="text-muted">#<?php echo $ticket->ticket_id ?></small> <?php echo $ticket->title ?></h1>
-    <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>" class="btn btn-sm btn-secondary">Edit Ticket</a>
+    <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>" class="btn btn-sm btn-secondary ml-3 align-super">Edit Ticket</a>
     <table class="table mt-5 w-25">
         <tr>
             <th width="120">Author</th>
@@ -24,7 +24,8 @@
             <td><?php echo get_user_first_name($ticket->worker_id) ?? '-' ?></td>
         </tr>
     </table>
-    <?php echo $ticket->description ?>
+    <div class="description p-5"><?php echo $ticket->description ?></div>
+
     <hr>
     <style>
     </style>
