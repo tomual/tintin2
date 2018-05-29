@@ -44,7 +44,7 @@ class Project extends MY_Controller
                 if ($id) {
                     $project = $this->project_model->get_by_unique_id($id);
                     if ($id) {
-                        redirect("project/list");
+                        redirect("project/all");
                     } else {
                         $this->session->set_flashdata('error', 'There was an unknown error getting your project.');
                     }

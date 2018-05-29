@@ -3,12 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller
 {
+    private $auth_methods = ['login', 'signup'];
     public function __construct()
     {
         parent::__construct();
         $this->user = null;
         if ($this->session->userdata('user_id')) {
             $this->user = $this->session->userdata('user');
+        } elseif($this->router->fetch_class() != 'home' && !in_array($this->router->fetch_method(), $this->auth_methods)) {
+            redirect('user/login');
         }
         if($this->user) {
             if (empty($this->statuses)) {

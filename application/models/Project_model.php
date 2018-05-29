@@ -85,8 +85,8 @@ class Project_model extends CI_Model {
             $this->db->where('removed', 'N');
         }
         $this->db->from('projects');
-        $this->db->join('(SELECT * FROM tickets WHERE status_id != 6) tickets', 'tickets.project_id = projects.project_id AND tickets.group_id = projects.group_id');
-        $this->db->join('(SELECT project_id, group_id, COUNT(*) AS count FROM tickets WHERE status_id = 5 AND group_id = 3 GROUP BY project_id) complete', 'complete.project_id = projects.project_id AND complete.group_id = projects.group_id');
+        $this->db->join('(SELECT * FROM tickets WHERE status_id != 6) tickets', 'tickets.project_id = projects.project_id AND tickets.group_id = projects.group_id', 'left');
+        $this->db->join('(SELECT project_id, group_id, COUNT(*) AS count FROM tickets WHERE status_id = 5 AND group_id = 3 GROUP BY project_id) complete', 'complete.project_id = projects.project_id AND complete.group_id = projects.group_id', 'left');
         $this->db->group_by('project_id');
         $projects = $this->db->get()->result();
         return $projects;

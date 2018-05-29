@@ -45,12 +45,15 @@
 
         <div class="form-group">
             <label class="form-label" for="comment">Comment</label>
-            <textarea class="form-control" name="comment" id="comment" cols="30" rows="3"></textarea>
+            <textarea class="ckeditor form-control" name="comment" id="comment" cols="30" rows="3"></textarea>
         </div>
         <input type="submit" value="Update" class="btn btn-primary mt-1">
     </form>    <hr>
 
     <h3 class="mt-3">Revisions</h3>
+    <?php if(!$revisions): ?>
+    <p class="text-muted">No changes have been made to this ticket.</p>
+    <?php endif ?>
     <?php
     $cursor = $ticket;
     $ignore = array('id', 'comment', 'updated_at', 'updated_by');

@@ -1,6 +1,7 @@
 <?php $this->load->view('header') ?>
 <h1>Welcome to tintin</h1>
 <p>Tintin is a ticketing system. It aims to be intuitive and essentialist - that is, it only has the necessities.</p>
+<?php if($summary): ?>
 <h3 class="mt-7">Tickets Summary</h3>
 <div class="row row-cards">
     <?php foreach ($summary as $count): ?>
@@ -37,4 +38,7 @@
     <?php endforeach ?>
     </tbody>
 </table>
+<?php else: ?>
+    <a href="<?php echo base_url('ticket/new') ?>" class="btn btn-primary mt-4">Create your first ticket</a>
+<?php endif ?>
 <?php $this->load->view('footer') ?>

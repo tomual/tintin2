@@ -19,6 +19,7 @@ class Status_model extends CI_Model {
     {
         $this->db->where('group_id', $group_id);
         $this->db->from('statuses');
+        $this->db->order_by('id', 'asc');
         $statuses = $this->db->get()->result();
         return $statuses;
     }

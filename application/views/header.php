@@ -10,13 +10,6 @@
     <meta name="author" content="LayoutIt!">
 
     <link href="https://tabler.github.io/tabler/assets/css/dashboard.css" rel="stylesheet"/>
-    <script src="<?php echo base_url('assets/js/require.js') ?>"></script>
-    <script>
-        requirejs.config({
-            baseUrl: '<?php echo base_url() ?>'
-        });
-    </script>
-    <script src="<?php echo base_url('assets/js/dashboard.js') ?>"></script>
     <link href="<?php echo base_url('css/tabler.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('css/style.css') ?>" rel="stylesheet">
 

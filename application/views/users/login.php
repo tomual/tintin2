@@ -16,5 +16,6 @@
         <?php echo form_error('password') ?>
     </div>
     <input type="submit" value="Log in" class="btn btn-primary">
+    <a href="<?php echo base_url('user/signup') ?>" class="d-block small mt-4">Don't have an account? Sign up</a>
 </form>
 <?php $this->load->view('footer') ?>
