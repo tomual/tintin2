@@ -7,8 +7,8 @@
     <tr>
         <th width="40%">Project</th>
         <th>Progress</th>
-        <th width="120">Started</th>
-        <th width="120">Completed</th>
+<!--        <th width="120">Started</th>-->
+<!--        <th width="120">Completed</th>-->
     </tr>
     </thead>
     <tbody>
@@ -31,8 +31,8 @@
                     <div class="progress-bar bg-blue" role="progressbar" style="width: <?php echo floor($project->complete / $project->tickets * 100) ?>%" aria-valuenow="<?php echo floor($project->complete / $project->tickets * 100) ?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </td>
-            <td><?php echo date('M j, Y', strtotime($project->created_at)) ?></td>
-            <td><?php echo date('M j, Y', strtotime($project->created_at)) ?></td>
+<!--            <td>--><?php //echo date('M j, Y', strtotime($project->created_at)) ?><!--</td>-->
+<!--            <td>--><?php //echo date('M j, Y', strtotime($project->created_at)) ?><!--</td>-->
         </tr>
     <?php endforeach ?>
     </tbody>

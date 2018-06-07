@@ -29,10 +29,10 @@
                     <div class="item-action dropdown">
                         <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><?php echo $this->user->first_name ?> <i class="fe fe-chevron-down"></i></a>
                         <div class="dropdown-menu" x-placement="bottom-end" style="position: absolute; transform: translate3d(-181px, 21px, 0px); top: 0px; left: 0px; will-change: transform;">
-                            <a href="javascript:void(0)" class="dropdown-item">Action </a>
-                            <a href="javascript:void(0)" class="dropdown-item">Another action </a>
-                            <a href="javascript:void(0)" class="dropdown-item">Something else here</a>
-                            <div class="dropdown-divider"></div>
+<!--                            <a href="javascript:void(0)" class="dropdown-item">Action </a>-->
+<!--                            <a href="javascript:void(0)" class="dropdown-item">Another action </a>-->
+<!--                            <a href="javascript:void(0)" class="dropdown-item">Something else here</a>-->
+<!--                            <div class="dropdown-divider"></div>-->
                             <a href="<?php echo base_url('user/logout') ?>" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         <li><a href="<?php echo base_url('ticket/all') ?>">Tickets List</a></li>
                         <li><a href="<?php echo base_url('project/all') ?>">Projects</a></li>
                         <li><a href="<?php echo base_url('ticket/query') ?>">Search</a></li>
-                        <li><a href="">Settings</a></li>
+<!--                        <li><a href="">Settings</a></li>-->
                     </ul>
                 </nav>
             </div>
