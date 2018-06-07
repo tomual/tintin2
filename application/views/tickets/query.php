@@ -26,6 +26,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
+                <!--
                 <div class="form-group">
                     <label class="form-label" for="status">Worker</label>
                     <select class="form-control" name="worker_id" id="worker_id">
@@ -35,6 +36,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
+                -->
                 <div class="form-group">
                     <div class="form-group">
                         <label class="form-label">Created between &hellip; </label>

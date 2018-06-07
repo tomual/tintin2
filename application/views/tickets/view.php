@@ -19,10 +19,12 @@
             <th>Status</th>
             <td><?php echo get_status_label($ticket->status_id) ?></td>
         </tr>
+        <!--
         <tr>
             <th>Worker</th>
             <td><?php echo get_user_first_name($ticket->worker_id) ?? '-' ?></td>
         </tr>
+        -->
     </table>
     <div class="description p-5"><?php echo $ticket->description ?></div>
 
@@ -66,7 +68,7 @@
             if (!in_array($key, $ignore) && $revision->{$key} != $cursor->{$key}) {
                 switch ($key) {
                     case 'description':
-                        echo "Description changed";
+                        echo " changed description";
                         break;
                     case 'project_id':
                         $before = $this->project_model->get_label($revision->{$key}) ?? 'None';
@@ -79,17 +81,19 @@
                         echo "<p class=\"text-muted mb-0\">Status changed from <b>$before</b> to <b>$after</b></p>";
                         break;
                     case 'worker_id':
+                        break;
                         $before = get_user_first_name($revision->{$key}) ?? 'Nobody';
                         $after = get_user_first_name($cursor->{$key});
                         echo "<p class=\"text-muted mb-0\">Worker changed from <b>$before</b> to <b>$after</b></p>";
-                        break;
                     default:
                         echo "<p class=\"text-muted mb-0\">" . ucfirst($key) . " changed from <b>{$revision->{$key}}</b> to <b>{$cursor->{$key}}</b></p>";
                         break;
                 }
             }
         }
-        echo "<blockquote>" . $revision->comment . "</blockquote>";
+        if(!empty($revision->comment)) {
+            echo "<blockquote class='py-5 mt-3'>" . $revision->comment . "</blockquote>";
+        }
         $cursor = $revision;
         echo "
         </div>
