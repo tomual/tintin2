@@ -80,6 +80,11 @@ class Ticket_model extends CI_Model {
                 $this->db->where($field, $query[$field]);
             }
         }
+        if(!empty($query['keywords']))
+        {
+            $this->db->like('title', $query['keywords']);
+            $this->db->like('description', $query['keywords']);
+        }
         $this->db->from('tickets');
         $this->db->order_by('created_at', 'desc');
         $tickets = $this->db->get()->result();

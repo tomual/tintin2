@@ -152,4 +152,10 @@ class Ticket extends MY_Controller
         }
         redirect("ticket/view/{$ticket_id}");
     }
+
+    public function query()
+    {
+        $tickets = $this->ticket_model->query($this->user->group_id, $this->input->get());
+        $this->load->view('tickets/query', compact('tickets'));
+    }
 }
