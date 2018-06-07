@@ -85,6 +85,26 @@ class Ticket_model extends CI_Model {
             $this->db->like('title', $query['keywords']);
             $this->db->like('description', $query['keywords']);
         }
+        if(!empty($query['created_from']) && strtotime($query['created_from']))
+        {
+            $created_from = date('Y-m-d', strtotime($query['created_from']));
+            if(strtotime($query['created_to'])) {
+                $created_to = date('Y-m-d', strtotime($query['created_to']));
+            } else {
+                $created_to = date('Y-m-d', strtotime("+1 day", strtotime($query['created_from'])));
+            }
+            $this->db->where("created_at BETWEEN '$created_from' AND '$created_to'");
+        }
+        if(!empty($query['updated_from']) && strtotime($query['updated_from']))
+        {
+            $updated_from = date('Y-m-d', strtotime($query['updated_from']));
+            if(strtotime($query['updated_to'])) {
+                $updated_to = date('Y-m-d', strtotime($query['updated_to']));
+            } else {
+                $updated_to = date('Y-m-d', strtotime("+1 day", strtotime($query['updated_from'])));
+            }
+            $this->db->where("updated_at BETWEEN '$updated_from' AND '$updated_to'");
+        }
         $this->db->from('tickets');
         $this->db->order_by('created_at', 'desc');
         $tickets = $this->db->get()->result();
