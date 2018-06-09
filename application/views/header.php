@@ -7,9 +7,10 @@
 
     <title>tintin</title>
 
-    <meta name="author" content="LayoutIt!">
+    <meta name="author" content="tomual">
 
     <link href="https://tabler.github.io/tabler/assets/css/dashboard.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//dbrekalo.github.io/simpleLightbox/dist/simpleLightbox.min.css">
     <link href="<?php echo base_url('css/tabler.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('css/style.css') ?>" rel="stylesheet">
 
@@ -83,9 +84,9 @@
                 <nav class="mt-9">
                     <ul>
                         <li><a href="<?php echo base_url() ?>">Home</a></li>
-                        <li><a href="<?php echo base_url('ticket/new') ?>">Features</a></li>
-                        <li><a href="<?php echo base_url('ticket/all') ?>">Screenshots</a></li>
-                        <li><a href="">About</a></li>
+                        <li><a href="<?php echo base_url('features') ?>">Features</a></li>
+                        <li><a href="<?php echo base_url('screenshots') ?>">Screenshots</a></li>
+                        <li><a href="<?php echo base_url('about') ?>">About</a></li>
                     </ul>
                 </nav>
             </div>

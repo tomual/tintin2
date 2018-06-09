@@ -163,3 +163,11 @@ form {    max-width: 560px;
     cursor: pointer;
     margin-right: -0.5rem;
 }
+
+.features .fe {
+    font-size: 2rem;
+    display: block;
+    text-align: center;
+    opacity: 0.5;
+    margin: 3rem 0;
+}

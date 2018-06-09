@@ -15,4 +15,19 @@ class Home extends MY_Controller {
         }
         $this->load->view('promo');
 	}
+
+    public function features()
+    {
+        $this->load->view('features');
+    }
+
+    public function screenshots()
+    {
+        $this->load->view('screenshots');
+    }
+
+    public function about()
+    {
+        $this->load->view('about');
+    }
 }

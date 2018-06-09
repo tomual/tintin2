@@ -6,6 +6,7 @@
 <script src="<?php echo base_url('assets/js/vendors/bootstrap.bundle.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/vendors/selectize.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/vendors/ckeditor/ckeditor.js') ?>"></script>
+<script src="//dbrekalo.github.io/simpleLightbox/dist/simpleLightbox.min.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -13,6 +14,7 @@
         CKEDITOR.replaceClass = 'ckeditor';
 
         $('.datepicker').datepicker();
+        $('.lightbox').simpleLightbox();
     });
 
     var urlNewTicket = '<?php echo base_url('ticket/new') ?>';
