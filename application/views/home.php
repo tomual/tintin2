@@ -1,6 +1,6 @@
 <?php $this->load->view('header') ?>
-<h1>Welcome to tintin</h1>
-<p>Tintin is a ticketing system. It aims to be intuitive and essentialist - that is, it only has the necessities.</p>
+<h1>Welcome back, <?php echo $this->user->first_name ?></h1>
+<p>Tintin is an open source ticketing system - last updated June 9th, 2018.</p>
 <?php if($summary): ?>
 <h3 class="mt-7">Tickets Summary</h3>
 <div class="row row-cards">
