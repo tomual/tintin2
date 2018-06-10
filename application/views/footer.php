@@ -14,7 +14,9 @@
         CKEDITOR.replaceClass = 'ckeditor';
 
         $('.datepicker').datepicker();
-        $('.lightbox').simpleLightbox();
+        $('.lightbox').simpleLightbox({
+            nextOnImageClick: false,
+        });
     });
 
     var urlNewTicket = '<?php echo base_url('ticket/new') ?>';
