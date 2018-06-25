@@ -7,3 +7,8 @@
 h1 {
     margin-bottom: 2rem;
 }
+.badge {
+	vertical-align: middle;
+	padding: 0.4em;
+	font-weight: bold;
+}

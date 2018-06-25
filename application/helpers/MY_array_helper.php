@@ -24,6 +24,21 @@ function get_status_label($status_id)
     return 'Unknown';
 }
 
+function get_status_label_html($status_id)
+{
+    $CI =& get_instance();
+    if (!$status_id) {
+        return null;
+    }
+    foreach ($CI->statuses as $status) {
+        if ($status->status_id == $status_id) {
+            $html = '<span class="badge bg-' . $status->color . '">' . $status->label . '</span>';
+            return $html;
+        }
+    }
+    return 'Unknown';
+}
+
 function get_project_label($project_id)
 {
     $CI =& get_instance();
