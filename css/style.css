@@ -190,7 +190,8 @@ form {
     width: 100%;
     clear: both;
 }
-.dim {
+.shortcuts-dim,
+.search-dim {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -204,4 +205,19 @@ form {
 .tr-terminal {
     background-color: rgba(0, 0, 0, 0.02);
     opacity: 0.5;
+}
+
+.search-overlay {
+    width: 340px;
+    position: absolute;
+    top: 0;
+    background: #f5f7fb;
+    border-radius: 3px;
+    z-index: 5;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    padding-bottom: 1rem;
+    left: 50%;
+    margin-left: -170px;
+    margin-top: 30px;
 }
