@@ -158,4 +158,15 @@ class Ticket extends MY_Controller
         $tickets = $this->ticket_model->query($this->user->group_id, $this->input->get());
         $this->load->view('tickets/query', compact('tickets'));
     }
+
+    public function ajax_search() 
+    {
+        $tickets = $this->ticket_model->query($this->user->group_id, $this->input->post());
+        foreach ($tickets as $key => $ticket) {
+            $tickets[$key]->created_at = date('M j, Y', strtotime($ticket->created_at));
+            $tickets[$key]->status_label = get_status_label($ticket->status_id);
+        }
+        header('Content-Type: application/json');
+        echo json_encode($tickets);
+    }
 }
