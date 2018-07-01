@@ -6,6 +6,7 @@
     <thead>
     <tr>
         <th width="40%">Project</th>
+        <th class="text-center">Tickets</th>
         <th>Progress</th>
 <!--        <th width="120">Started</th>-->
 <!--        <th width="120">Completed</th>-->
@@ -18,6 +19,7 @@
                 <div><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>"><?php echo $project->label ?></a></div>
                 <div class="small text-muted"><?php echo $project->description ?></div>
             </td>
+            <td class="text-center"><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>" class="text-inherit"><?php echo $project->tickets ?></a></td>
             <td>
                 <div class="clearfix">
                     <div class="float-left">
