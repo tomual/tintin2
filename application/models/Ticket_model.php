@@ -14,7 +14,8 @@ class Ticket_model extends CI_Model {
         'updated_at'
     );
 
-    public function create($title, $description, $project_id) {
+    public function create($title, $description, $project_id) 
+    {
         $data = array(
             'ticket_id' => $this->get_next_ticket_id($this->user->group_id),
             'title' => $title,
@@ -32,10 +33,20 @@ class Ticket_model extends CI_Model {
     {
         $revision = (array) $this->get($ticket_id, $group_id);
 
+        if($data['status_id'] == 5 && $revision['status_id'] != 4) {
+            $data['status_id'] = 4;
+            $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
+            $data['status_id'] = 5;
+        }
+
         if($data['status_id'] == 4) {
             $data['worker_id'] = $this->user->user_id;
         } elseif($data['status_id'] != 5) {
             $data['worker_id'] = null;
+        }
+
+        if($data['status_id'] == 5 && $revision['status_id'] != 4) {
+            $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
         }
 
         $revision['comment'] = $data['comment'];

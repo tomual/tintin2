@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label class="form-label" for="comment">Comment</label>
-            <textarea class="ckeditor form-control" name="comment" id="comment" cols="30" rows="3"></textarea>
+            <textarea class="ckeditor ckeditor-small form-control" name="comment" id="comment"></textarea>
         </div>
         <input type="submit" value="Update" class="btn btn-primary mt-1">
     </form>    <hr>

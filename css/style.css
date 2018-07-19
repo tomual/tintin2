@@ -221,3 +221,7 @@ form {
     margin-left: -170px;
     margin-top: 30px;
 }
+
+.ckeditor-small + .cke #cke_1_contents {
+    height: 150px !important;
+}
