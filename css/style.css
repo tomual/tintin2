@@ -225,3 +225,9 @@ form {
 .ckeditor-small + .cke #cke_1_contents {
     height: 150px !important;
 }
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+    background: #fff;
+    cursor: text;
+    display: block !important;
+}
+

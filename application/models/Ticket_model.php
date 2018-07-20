@@ -93,8 +93,10 @@ class Ticket_model extends CI_Model {
         }
         if(!empty($query['keywords']))
         {
+            $this->db->group_start();
             $this->db->like('title', $query['keywords']);
             $this->db->or_like('description', $query['keywords']);
+            $this->db->group_end();
         }
         if(!empty($query['created_from']) && strtotime($query['created_from']))
         {
