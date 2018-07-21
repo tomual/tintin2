@@ -31,9 +31,30 @@
 <script src="<?php echo base_url('assets/js/vendors/ckeditor/ckeditor.js') ?>"></script>
 <script src="//dbrekalo.github.io/simpleLightbox/dist/simpleLightbox.min.js"></script>
 <script>
-
+var s;
     $(document).ready(function () {
-        $('.selectize').selectize();
+
+        if($('.selectize').length) {
+            
+             s = $('.selectize').selectize({
+                onEnter: function() {
+                    $('form').trigger('submit');
+                    s.focus();
+                }
+            })[0].selectize;
+
+            onKeyDown = s.onKeyDown.bind(s)
+            s.onKeyDown = function(e) {
+                var result = onKeyDown(e)
+                if (e.keyCode == 13) {
+                    console.log($(e.target).closest('.form-group').next('input')[0]);
+                    $(e.target).closest('.form-group').next('input')[0].focus();
+                    // this.settings.onEnter()
+                }
+                return result
+            }.bind(s)
+        }
+
         CKEDITOR.replaceClass = 'ckeditor';
 
         $('.datepicker').datepicker();
