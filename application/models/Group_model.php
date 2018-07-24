@@ -16,32 +16,38 @@ class Group_model extends CI_Model {
             array(
                 'status_id' => 1,
                 'group_id' => $group_id,
-                'label' => 'Backlog'
+                'label' => 'Backlog',
+                'color' => 'purple'
             ),
             array(
                 'status_id' => 2,
                 'group_id' => $group_id,
-                'label' => 'Input'
+                'label' => 'Input',
+                'color' => 'blue'
             ),
             array(
                 'status_id' => 3,
                 'group_id' => $group_id,
-                'label' => 'On Hold'
+                'label' => 'On Hold',
+                'color' => 'azure'
             ),
             array(
                 'status_id' => 4,
                 'group_id' => $group_id,
-                'label' => 'Working'
+                'label' => 'Working',
+                'color' => 'lime'
             ),
             array(
                 'status_id' => 5,
                 'group_id' => $group_id,
-                'label' => 'Complete'
+                'label' => 'Complete',
+                'color' => 'cyan'
             ),
             array(
                 'status_id' => 6,
                 'group_id' => $group_id,
-                'label' => 'Cancelled'
+                'label' => 'Cancelled',
+                'color' => 'orange'
             ),
         );
 
