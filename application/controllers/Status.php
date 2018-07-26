@@ -35,12 +35,12 @@ class Status extends MY_Controller
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('label', 'Label', 'required');
-            $this->form_validation->set_rules('description', 'Description', 'required');
+            $this->form_validation->set_rules('color', 'Color', 'required');
 
             if ($this->form_validation->run() !== FALSE) {
                 $label = $this->input->post('label');
-                $description = $this->input->post('description');
-                $id = $this->status_model->create($label, $description);
+                $color = $this->input->post('color');
+                $id = $this->status_model->create($label, $color);
                 if ($id) {
                     $status = $this->status_model->get_by_unique_id($id);
                     if ($id) {

@@ -3,6 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Status_model extends CI_Model {
 
+    public function create($label, $color) {
+        $data = array(
+            'status_id' => $this->get_next_status_id($this->user->group_id),
+            'group_id' => $this->user->group_id,
+            'label' => $label,
+            'color' => $color,
+            'created_by' => $this->user->user_id
+        );
+        $this->db->insert('statuses', $data);
+        return $this->db->insert_id();
+    }
+
     public function get($status_id, $group_id = null)
     {
         if(!$group_id) {
@@ -13,6 +25,16 @@ class Status_model extends CI_Model {
         $this->db->from('statuses');
         $status = $this->db->get()->first_row();
         return $status;
+    }
+
+    public function get_by_unique_id($id) {
+        $this->db->where('id', $id);
+        $this->db->from('statuses');
+        $status = $this->db->get()->first_row();
+        if($status) {
+            return $status;
+        }
+        return null;
     }
 
     public function get_all($group_id)
@@ -34,6 +56,14 @@ class Status_model extends CI_Model {
         $this->db->from('statuses');
         $status = $this->db->get()->first_row();
         return $status->label ?? null;
+    }
+
+    private function get_next_status_id($group_id)
+    {
+        $this->db->select('id');
+        $this->db->where('group_id', $group_id);
+        $this->db->from('statuses');
+        return $this->db->get()->num_rows() + 1;
     }
 
 }
