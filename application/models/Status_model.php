@@ -3,16 +3,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Status_model extends CI_Model {
 
-    public function create($label, $color) {
+    public function create($label, $color, $complete, $cancel) {
         $data = array(
             'status_id' => $this->get_next_status_id($this->user->group_id),
             'group_id' => $this->user->group_id,
             'label' => $label,
             'color' => $color,
+            'complete' => $complete,
+            'cancel' => $cancel,
             'created_by' => $this->user->user_id
         );
         $this->db->insert('statuses', $data);
         return $this->db->insert_id();
+    }
+
+    public function update($status_id, $group_id, $data)
+    {
+        $this->db->set($data);
+        $this->db->where('status_id', $status_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->update('statuses');
+        return $this->db->affected_rows();
+    }
+
+    public function delete($status_id, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $this->db->set('removed', 'Y');
+        $this->db->where('status_id', $status_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->update('statuses');
+        return $this->db->affected_rows();
     }
 
     public function get($status_id, $group_id = null)

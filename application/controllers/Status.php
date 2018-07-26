@@ -36,11 +36,15 @@ class Status extends MY_Controller
 
             $this->form_validation->set_rules('label', 'Label', 'required');
             $this->form_validation->set_rules('color', 'Color', 'required');
+            $this->form_validation->set_rules('complete', 'complete', 'alpha');
+            $this->form_validation->set_rules('cancel', 'cancel', 'alpha');
 
             if ($this->form_validation->run() !== FALSE) {
                 $label = $this->input->post('label');
                 $color = $this->input->post('color');
-                $id = $this->status_model->create($label, $color);
+                $cancel = $this->input->post('cancel') ?? 'N';
+                $complete = $this->input->post('complete') ?? 'N';
+                $id = $this->status_model->create($label, $color, $cancel, $complete);
                 if ($id) {
                     $status = $this->status_model->get_by_unique_id($id);
                     if ($id) {
@@ -66,12 +70,16 @@ class Status extends MY_Controller
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('label', 'Label', 'required');
-            $this->form_validation->set_rules('description', 'Description', 'required');
+            $this->form_validation->set_rules('color', 'color', 'required');
+            $this->form_validation->set_rules('complete', 'complete', 'alpha');
+            $this->form_validation->set_rules('cancel', 'cancel', 'alpha');
 
             if ($this->form_validation->run() !== FALSE) {
                 $data = array(
                     'label' => $this->input->post('label'),
-                    'description' => $this->input->post('description'),
+                    'color' => $this->input->post('color'),
+                    'cancel' => $this->input->post('cancel'),
+                    'complete' => $this->input->post('complete'),
                 );
                 $has_difference = false;
                 foreach ($data as $key => $value) {

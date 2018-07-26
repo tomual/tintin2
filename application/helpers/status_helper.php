@@ -11,7 +11,7 @@ function is_terminal($status_id)
     
     foreach ($CI->statuses as $status) {
         if ($status->status_id == $status_id) {
-            return $status->cancelled == 'Y';
+            return $status->cancel == 'Y';
         }
     }
     return false;

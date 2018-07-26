@@ -14,10 +14,10 @@
     <tbody>
     <?php foreach ($statuses as $status): ?>
         <tr>
-            <td><?php echo $status->label ?></td>
+            <td><a href="<?php echo base_url("ticket/status/{$status->status_id}") ?>"><?php echo $status->label ?></a></td>
             <td><?php echo $status->color ?></td>
-            <td><?php echo $status->completed ?></td>
-            <td><?php echo $status->cancelled ?></td>
+            <td><?php echo $status->complete ?></td>
+            <td><?php echo $status->cancel ?></td>
         </tr>
     <?php endforeach ?>
     </tbody>
