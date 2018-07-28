@@ -15,12 +15,12 @@
         <div class="form-label">Status options</div>
         <div class="custom-controls-stacked">
                 <label class="custom-control custom-checkbox">
-                    <input class="custom-control-input" name="complete" value="Y" type="checkbox" <?php echo set_checkbox('complete', 'Y', $status->complete == 'Y') ?>>
+                    <input class="custom-control-input" name="complete" value="Y" type="checkbox" <?php echo set_checkbox('complete', 'Y', $status->complete ?? null == 'Y') ?>>
                     <span class="custom-control-label">Completed status</span>
                 </label>
 
                 <label class="custom-control custom-checkbox">
-                    <input class="custom-control-input" name="cancel" value="Y" type="checkbox" <?php echo set_checkbox('cancel', 'Y', $status->cancel == 'Y') ?>>
+                    <input class="custom-control-input" name="cancel" value="Y" type="checkbox" <?php echo set_checkbox('cancel', 'Y', $status->cancel ?? null == 'Y') ?>>
                     <span class="custom-control-label">Cancelled status</span>
                 </label>
         </div>
