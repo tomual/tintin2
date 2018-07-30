@@ -17,7 +17,7 @@
     <?php foreach ($projects as $project): ?>
         <tr>
             <td>
-                <div><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>" class="text-inherit"><?php echo $project->label ?></a></div>
+                <div><a href="<?php echo base_url("project/edit/{$project->project_id}") ?>" class="text-inherit"><?php echo $project->label ?></a></div>
                 <div class="small text-muted"><?php echo $project->description ?></div>
             </td>
             <td class="text-center"><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>" class="text-inherit"><?php echo $project->tickets ?></a></td>
@@ -34,9 +34,7 @@
                     <div class="progress-bar bg-blue" role="progressbar" style="width: <?php echo floor($project->complete / $project->tickets * 100) ?>%" aria-valuenow="<?php echo floor($project->complete / $project->tickets * 100) ?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </td>
-            <td><a href="<?php echo base_url("project/edit/{$project->project_id}") ?>" class="btn btn-sm btn-secondary">Edit</a></td>
-<!--            <td>--><?php //echo date('M j, Y', strtotime($project->created_at)) ?><!--</td>-->
-<!--            <td>--><?php //echo date('M j, Y', strtotime($project->created_at)) ?><!--</td>-->
+            <td><a href="<?php echo base_url("ticket/project/{$project->project_id}") ?>" class="btn btn-sm btn-secondary">View Tickets</a></td>
         </tr>
     <?php endforeach ?>
     </tbody>

@@ -60,9 +60,12 @@ class Status_model extends CI_Model {
         return null;
     }
 
-    public function get_all($group_id)
+    public function get_all($group_id, $active = false)
     {
         $this->db->where('group_id', $group_id);
+        if($active) {
+            $this->db->where('removed', 'N');
+        }
         $this->db->from('statuses');
         $this->db->order_by('id', 'asc');
         $statuses = $this->db->get()->result();

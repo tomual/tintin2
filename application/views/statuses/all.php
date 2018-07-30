@@ -12,14 +12,14 @@
         <th></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="sortable">
     <?php foreach ($statuses as $status): ?>
-        <tr>
-            <td><a href="<?php echo base_url("ticket/status/{$status->status_id}") ?>" class="text-inherit"><?php echo $status->label ?></a></td>
+        <tr data-id="<?php echo $status->status_id ?>" class="status-row">
+            <td><a href="<?php echo base_url("status/edit/{$status->status_id}") ?>" class="text-inherit"><?php echo $status->label ?></a></td>
             <td><span class="status-icon bg-<?php echo $status->color ?>"></span><?php echo ucfirst($status->color) ?></td>
             <td class="text-center"><?php echo $status->complete == 'Y' ? '<i class="fe fe-check"></i>' : '' ?></td>
             <td class="text-center"><?php echo $status->cancel == 'Y' ? '<i class="fe fe-check"></i>' : '' ?></td>
-            <td><a href="<?php echo base_url("status/edit/{$status->status_id}") ?>" class="btn btn-sm btn-secondary">Edit</a></td>
+            <td><a href="<?php echo base_url("ticket/status/{$status->status_id}") ?>" class="btn btn-sm btn-secondary">View Tickets</a></td>
         </tr>
     <?php endforeach ?>
     </tbody>

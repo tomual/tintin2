@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td><?php echo get_status_label($ticket->status_id) ?></td>
+            <td><?php echo get_status_label_html($ticket->status_id) ?></td>
         </tr>
         <!--
         <tr>

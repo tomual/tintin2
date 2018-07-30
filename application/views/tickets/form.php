@@ -45,8 +45,8 @@
             <?php echo form_error('comment') ?>
         </div>
 
-        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
     <?php else: ?>
-        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
     <?php endif ?>
 </form>

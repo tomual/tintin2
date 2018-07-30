@@ -12,14 +12,14 @@
     </div>
 
     <?php if ($this->router->fetch_method() != 'new'): ?>
-        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
     <?php else: ?>
-        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
     <?php endif ?>
 </form>
 
 <?php if ($this->router->fetch_method() != 'new'): ?>
     <form action="<?php echo base_url("project/delete/{$project->project_id}") ?>" method="post">
-        <input type="submit" value="Delete Project" onclick="return confirm('Delete this project?')" class="btn btn-secondary mt-3">
+        <input type="submit" value="Delete Project" onclick="return confirm('Delete this project?')" class="btn btn-link mt-3">
     </form>
 <?php endif ?>

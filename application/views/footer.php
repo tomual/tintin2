@@ -180,6 +180,21 @@ var s;
             });
         }
     });
+
+    $( function() {
+        $( ".sortable" ).sortable({
+            update: updateStatusOrder
+        });
+        $( ".sortable" ).disableSelection();
+    } );
+
+    function updateStatusOrder() {
+        var ugh = [];
+        var rows = $('.status-row')
+        rows.each(function (i) {
+            ugh.push($(rows[i]).data('id'));
+        });
+    }
 </script>
 </body>
 </html>
