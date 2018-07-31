@@ -94,4 +94,41 @@ class User extends MY_Controller {
         $this->session->sess_destroy();
         redirect('/');
     }
+
+    public function all()
+    {
+        $users = array();
+        $this->load->view('users/all', compact('users'));
+    }
+
+    public function new()
+    {
+        $this->load->helper(array('form', 'url'));
+        if($this->input->method() == 'post') {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+
+            if ($this->form_validation->run() !== FALSE)
+            {
+                $data = array(
+                    'group_id' => $this->user->group_id,
+                    'email' => $this->input->post('email'),
+                    'password' => $this->input->post('password'),
+                    'first_name' => $this->input->post('first_name'),
+                    'last_name' => $this->input->post('last_name'),
+                );
+                $user_unique_id = $this->user_model->create($data);
+                if($user_unique_id) {
+                    redirect('/');
+                } else {
+                    $this->session->set_flashdata('error', 'There was an unknown issue creating the user.');
+                }
+            }
+        }
+        $this->load->view('users/form');
+    }
 }

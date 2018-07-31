@@ -10,61 +10,61 @@
         <div class="row gutters-xs">
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="azure" class="colorinput-input" type="radio" <?php echo set_radio('color', 'azure', $status->color == 'azure' ?? true) ?>>
+                    <input name="color" value="azure" class="colorinput-input" type="radio" <?php echo set_radio('color', 'azure', $status->color ?? null == 'azure' ?? true) ?>>
                     <span class="colorinput-color bg-azure"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="indigo" class="colorinput-input" type="radio" <?php echo set_radio('color', 'indigo', $status->color == 'indigo') ?>>
+                    <input name="color" value="indigo" class="colorinput-input" type="radio" <?php echo set_radio('color', 'indigo', $status->color ?? null == 'indigo') ?>>
                     <span class="colorinput-color bg-indigo"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="purple" class="colorinput-input" type="radio" <?php echo set_radio('color', 'purple', $status->color == 'purple') ?>>
+                    <input name="color" value="purple" class="colorinput-input" type="radio" <?php echo set_radio('color', 'purple', $status->color ?? null == 'purple') ?>>
                     <span class="colorinput-color bg-purple"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="pink" class="colorinput-input" type="radio" <?php echo set_radio('color', 'pink', $status->color == 'pink') ?>>
+                    <input name="color" value="pink" class="colorinput-input" type="radio" <?php echo set_radio('color', 'pink', $status->color ?? null == 'pink') ?>>
                     <span class="colorinput-color bg-pink"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="red" class="colorinput-input" type="radio" <?php echo set_radio('color', 'red', $status->color == 'red') ?>>
+                    <input name="color" value="red" class="colorinput-input" type="radio" <?php echo set_radio('color', 'red', $status->color ?? null == 'red') ?>>
                     <span class="colorinput-color bg-red"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="orange" class="colorinput-input" type="radio" <?php echo set_radio('color', 'orange', $status->color == 'orange') ?>>
+                    <input name="color" value="orange" class="colorinput-input" type="radio" <?php echo set_radio('color', 'orange', $status->color ?? null == 'orange') ?>>
                     <span class="colorinput-color bg-orange"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="yellow" class="colorinput-input" type="radio" <?php echo set_radio('color', 'yellow', $status->color == 'yellow') ?>>
+                    <input name="color" value="yellow" class="colorinput-input" type="radio" <?php echo set_radio('color', 'yellow', $status->color ?? null == 'yellow') ?>>
                     <span class="colorinput-color bg-yellow"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="lime" class="colorinput-input" type="radio" <?php echo set_radio('color', 'lime', $status->color == 'lime') ?>>
+                    <input name="color" value="lime" class="colorinput-input" type="radio" <?php echo set_radio('color', 'lime', $status->color ?? null == 'lime') ?>>
                     <span class="colorinput-color bg-lime"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="green" class="colorinput-input" type="radio" <?php echo set_radio('color', 'green', $status->color == 'green') ?>>
+                    <input name="color" value="green" class="colorinput-input" type="radio" <?php echo set_radio('color', 'green', $status->color ?? null == 'green') ?>>
                     <span class="colorinput-color bg-green"></span>
                 </label>
             </div>
             <div class="col-auto">
                 <label class="colorinput">
-                    <input name="color" value="teal" class="colorinput-input" type="radio" <?php echo set_radio('color', 'teal', $status->color == 'teal') ?>>
+                    <input name="color" value="teal" class="colorinput-input" type="radio" <?php echo set_radio('color', 'teal', $status->color ?? null == 'teal') ?>>
                     <span class="colorinput-color bg-teal"></span>
                 </label>
             </div>
