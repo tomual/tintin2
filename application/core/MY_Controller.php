@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller
         }
         if($this->user) {
             if (empty($this->statuses)) {
-                $this->statuses = $this->status_model->get_all($this->user->group_id);
+                $this->statuses = $this->status_model->get_all($this->user->group_id, true);
             }
             if (empty($this->users)) {
                 $this->users = $this->user_model->get_all($this->user->group_id);

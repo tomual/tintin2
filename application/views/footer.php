@@ -189,10 +189,14 @@ var s;
     } );
 
     function updateStatusOrder() {
-        var ugh = [];
-        var rows = $('.status-row')
+        var ordering = [];
+        var rows = $('.status-row');
         rows.each(function (i) {
-            ugh.push($(rows[i]).data('id'));
+            ordering.push($(rows[i]).data('id'));
+        });
+
+        $.post( '<?php echo base_url('status/ajax_set_order') ?>', { data: ordering }, function( data ) {
+            console.log(data);
         });
     }
 </script>

@@ -113,4 +113,12 @@ class Status extends MY_Controller
             }
         }
     }
+
+    public function ajax_set_order() {
+        if ($this->input->method() == 'post') {
+            $data = $this->input->post('data');
+            $updated = $this->status_model->set_order($data);
+            echo $updated;
+        }
+    }
 }

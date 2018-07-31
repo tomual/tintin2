@@ -67,7 +67,7 @@ class Status_model extends CI_Model {
             $this->db->where('removed', 'N');
         }
         $this->db->from('statuses');
-        $this->db->order_by('id', 'asc');
+        $this->db->order_by('order', 'asc');
         $statuses = $this->db->get()->result();
         return $statuses;
     }
@@ -90,6 +90,24 @@ class Status_model extends CI_Model {
         $this->db->where('group_id', $group_id);
         $this->db->from('statuses');
         return $this->db->get()->num_rows() + 1;
+    }
+
+    public function set_order($data, $group_id = null)
+    {
+        if(!$group_id) {
+            $group_id = $this->user->group_id;
+        }
+        $affected_rows = 0;
+        foreach ($data as $index => $status_id) {
+            if($status_id) {
+                $this->db->set('order', $index);
+                $this->db->where('status_id', $status_id);
+                $this->db->where('group_id', $group_id);
+                $this->db->update('statuses');
+                $affected_rows += $this->db->affected_rows();
+            }
+        }
+        return $affected_rows;
     }
 
 }
