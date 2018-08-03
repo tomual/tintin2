@@ -97,7 +97,7 @@ class User extends MY_Controller {
 
     public function all()
     {
-        $users = array();
+        $users = $this->user_model->get_all($this->user->group_id);
         $this->load->view('users/all', compact('users'));
     }
 
