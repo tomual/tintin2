@@ -15,13 +15,13 @@ class Project extends MY_Controller
 
     public function view($project_id)
     {
-        $project = $this->project_model->get($project_id, $this->user->group_id);
+        $project = $this->project_model->get($project_id, $this->user->team_id);
         $this->load->view('projects/view', compact('project'));
     }
 
     public function all()
     {
-        $projects = $this->project_model->get_all_with_ticket_count($this->user->group_id, true);
+        $projects = $this->project_model->get_all_with_ticket_count($this->user->team_id, true);
         $this->load->view('projects/all', compact('projects'));
     }
 
@@ -29,7 +29,7 @@ class Project extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $projects = $this->project_model->get_all($this->user->group_id);
+        $projects = $this->project_model->get_all($this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -60,7 +60,7 @@ class Project extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $project = $this->project_model->get($project_id, $this->user->group_id);
+        $project = $this->project_model->get($project_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -80,7 +80,7 @@ class Project extends MY_Controller
                     }
                 }
                 if ($has_difference) {
-                    $updated = $this->project_model->update($project_id, $this->user->group_id, $data);
+                    $updated = $this->project_model->update($project_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/project/{$project_id}");
                     } else {

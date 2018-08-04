@@ -15,17 +15,17 @@ class Ticket extends MY_Controller
 
     public function view($ticket_id)
     {
-        $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
-        $revisions = $this->ticket_model->get_revisions($ticket_id, $this->user->group_id);
+        $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
+        $revisions = $this->ticket_model->get_revisions($ticket_id, $this->user->team_id);
         $this->load->view('tickets/view', compact('ticket', 'revisions'));
     }
 
     public function all()
     {
         if($this->input->get()) {
-            $tickets = $this->ticket_model->query($this->user->group_id, $this->input->get());
+            $tickets = $this->ticket_model->query($this->user->team_id, $this->input->get());
         } else {
-            $tickets = $this->ticket_model->get_all($this->user->group_id);
+            $tickets = $this->ticket_model->get_all($this->user->team_id);
         }
         $this->load->view('tickets/all', compact('tickets'));
     }
@@ -33,14 +33,14 @@ class Ticket extends MY_Controller
     public function project($project_id)
     {
         $project = $this->project_model->get($project_id);
-        $tickets = $this->ticket_model->query($this->user->group_id, compact('project_id'));
+        $tickets = $this->ticket_model->query($this->user->team_id, compact('project_id'));
         $this->load->view('tickets/project', compact('tickets', 'project'));
     }
 
     public function status($status_id)
     {
         $status = $this->status_model->get($status_id);
-        $tickets = $this->ticket_model->query($this->user->group_id, compact('status_id'));
+        $tickets = $this->ticket_model->query($this->user->team_id, compact('status_id'));
         $this->load->view('tickets/status', compact('tickets', 'status'));
     }
 
@@ -78,7 +78,7 @@ class Ticket extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
+        $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -102,7 +102,7 @@ class Ticket extends MY_Controller
                     }
                 }
                 if($has_difference || $data['comment']) {
-                    $updated = $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
+                    $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/view/{$ticket_id}");
                     } else {
@@ -120,7 +120,7 @@ class Ticket extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $ticket = $this->ticket_model->get($ticket_id, $this->user->group_id);
+        $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -139,7 +139,7 @@ class Ticket extends MY_Controller
                     }
                 }
                 if($has_difference || $data['comment']) {
-                    $updated = $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
+                    $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/view/{$ticket_id}");
                     } else {
@@ -155,13 +155,13 @@ class Ticket extends MY_Controller
 
     public function query()
     {
-        $tickets = $this->ticket_model->query($this->user->group_id, $this->input->get());
+        $tickets = $this->ticket_model->query($this->user->team_id, $this->input->get());
         $this->load->view('tickets/query', compact('tickets'));
     }
 
     public function ajax_search() 
     {
-        $tickets = $this->ticket_model->query($this->user->group_id, $this->input->post());
+        $tickets = $this->ticket_model->query($this->user->team_id, $this->input->post());
         foreach ($tickets as $key => $ticket) {
             $tickets[$key]->created_at = date('M j, Y', strtotime($ticket->created_at));
             $tickets[$key]->status_label = get_status_label($ticket->status_id);

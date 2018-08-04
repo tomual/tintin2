@@ -15,13 +15,13 @@ class MY_Controller extends CI_Controller
         }
         if($this->user) {
             if (empty($this->statuses)) {
-                $this->statuses = $this->status_model->get_all($this->user->group_id, true);
+                $this->statuses = $this->status_model->get_all($this->user->team_id, true);
             }
             if (empty($this->users)) {
-                $this->users = $this->user_model->get_all($this->user->group_id);
+                $this->users = $this->user_model->get_all($this->user->team_id);
             }
             if (empty($this->projects)) {
-                $this->projects = $this->project_model->get_all($this->user->group_id);
+                $this->projects = $this->project_model->get_all($this->user->team_id);
             }
             if (empty($this->updated)) {
                 $this->updated = $this->ticket_model->get_updated(5);

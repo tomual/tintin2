@@ -15,13 +15,13 @@ class Status extends MY_Controller
 
     public function view($status_id)
     {
-        $status = $this->status_model->get($status_id, $this->user->group_id);
+        $status = $this->status_model->get($status_id, $this->user->team_id);
         $this->load->view('statuses/view', compact('status'));
     }
 
     public function all()
     {
-        $statuses = $this->status_model->get_all($this->user->group_id, true);
+        $statuses = $this->status_model->get_all($this->user->team_id, true);
         $this->load->view('statuses/all', compact('statuses'));
     }
 
@@ -29,7 +29,7 @@ class Status extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $statuses = $this->status_model->get_all($this->user->group_id);
+        $statuses = $this->status_model->get_all($this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -64,7 +64,7 @@ class Status extends MY_Controller
     {
         $this->load->helper(array('form', 'url'));
 
-        $status = $this->status_model->get($status_id, $this->user->group_id);
+        $status = $this->status_model->get($status_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -88,7 +88,7 @@ class Status extends MY_Controller
                     }
                 }
                 if ($has_difference) {
-                    $updated = $this->status_model->update($status_id, $this->user->group_id, $data);
+                    $updated = $this->status_model->update($status_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/status/{$status_id}");
                     } else {

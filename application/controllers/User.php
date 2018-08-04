@@ -8,7 +8,7 @@ class User extends MY_Controller {
         parent::__construct();
         $this->load->helper('cookie');
         $this->load->model('user_model');
-        $this->load->model('group_model');
+        $this->load->model('team_model');
     }
 
     public function index()
@@ -22,7 +22,7 @@ class User extends MY_Controller {
         if($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('name', 'Group Name', 'required');
+            $this->form_validation->set_rules('name', 'team Name', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
             $this->form_validation->set_rules('first_name', 'First Name', 'required');
             $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -44,13 +44,13 @@ class User extends MY_Controller {
                     if($user) {
                         $this->session->set_userdata('user_id', $user->user_id);
                         $this->session->set_userdata('user', $user);
-                        $group_id = $this->group_model->create($user_unique_id, $this->input->post('name'));
-                        if($group_id) {
-                            $user->group_id = $group_id;
+                        $team_id = $this->team_model->create($user_unique_id, $this->input->post('name'));
+                        if($team_id) {
+                            $user->team_id = $team_id;
                             $this->user_model->update($user);
                             redirect('/');
                         } else {
-                            $this->session->set_flashdata('error', 'There was an unknown issue creating your group.');
+                            $this->session->set_flashdata('error', 'There was an unknown issue creating your team.');
                         }
                     } else {
                         $this->session->set_flashdata('error', 'There was an unknown issue logging you in.');
@@ -97,7 +97,7 @@ class User extends MY_Controller {
 
     public function all()
     {
-        $users = $this->user_model->get_all($this->user->group_id);
+        $users = $this->user_model->get_all($this->user->team_id);
         $this->load->view('users/all', compact('users'));
     }
 
@@ -115,7 +115,7 @@ class User extends MY_Controller {
             if ($this->form_validation->run() !== FALSE)
             {
                 $data = array(
-                    'group_id' => $this->user->group_id,
+                    'team_id' => $this->user->team_id,
                     'email' => $this->input->post('email'),
                     'password' => $this->input->post('password'),
                     'first_name' => $this->input->post('first_name'),

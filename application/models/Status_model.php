@@ -5,8 +5,8 @@ class Status_model extends CI_Model {
 
     public function create($label, $color, $complete, $cancel) {
         $data = array(
-            'status_id' => $this->get_next_status_id($this->user->group_id),
-            'group_id' => $this->user->group_id,
+            'status_id' => $this->get_next_status_id($this->user->team_id),
+            'team_id' => $this->user->team_id,
             'label' => $label,
             'color' => $color,
             'complete' => $complete,
@@ -17,33 +17,33 @@ class Status_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    public function update($status_id, $group_id, $data)
+    public function update($status_id, $team_id, $data)
     {
         $this->db->set($data);
         $this->db->where('status_id', $status_id);
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->update('statuses');
         return $this->db->affected_rows();
     }
 
-    public function delete($status_id, $group_id = null)
+    public function delete($status_id, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
         $this->db->set('removed', 'Y');
         $this->db->where('status_id', $status_id);
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->update('statuses');
         return $this->db->affected_rows();
     }
 
-    public function get($status_id, $group_id = null)
+    public function get($status_id, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->where('status_id', $status_id);
         $this->db->from('statuses');
         $status = $this->db->get()->first_row();
@@ -60,9 +60,9 @@ class Status_model extends CI_Model {
         return null;
     }
 
-    public function get_all($group_id, $active = false)
+    public function get_all($team_id, $active = false)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         if($active) {
             $this->db->where('removed', 'N');
         }
@@ -72,37 +72,37 @@ class Status_model extends CI_Model {
         return $statuses;
     }
 
-    public function get_label($status_id, $group_id = null)
+    public function get_label($status_id, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
         $this->db->where('status_id', $status_id);
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('statuses');
         $status = $this->db->get()->first_row();
         return $status->label ?? null;
     }
 
-    private function get_next_status_id($group_id)
+    private function get_next_status_id($team_id)
     {
         $this->db->select('id');
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('statuses');
         return $this->db->get()->num_rows() + 1;
     }
 
-    public function set_order($data, $group_id = null)
+    public function set_order($data, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
         $affected_rows = 0;
         foreach ($data as $index => $status_id) {
             if($status_id) {
                 $this->db->set('order', $index);
                 $this->db->where('status_id', $status_id);
-                $this->db->where('group_id', $group_id);
+                $this->db->where('team_id', $team_id);
                 $this->db->update('statuses');
                 $affected_rows += $this->db->affected_rows();
             }

@@ -17,25 +17,25 @@ class Ticket_model extends CI_Model {
     public function create($title, $description, $project_id) 
     {
         $data = array(
-            'ticket_id' => $this->get_next_ticket_id($this->user->group_id),
+            'ticket_id' => $this->get_next_ticket_id($this->user->team_id),
             'title' => $title,
             'description' => $description,
             'status_id' => 1,
             'project_id' => $project_id,
             'user_id' => $this->user->user_id,
-            'group_id' => $this->user->group_id,
+            'team_id' => $this->user->team_id,
         );
         $this->db->insert('tickets', $data);
         return $this->db->insert_id();
     }
 
-    public function update($ticket_id, $group_id, $data)
+    public function update($ticket_id, $team_id, $data)
     {
-        $revision = (array) $this->get($ticket_id, $group_id);
+        $revision = (array) $this->get($ticket_id, $team_id);
 
         if($data['status_id'] == 5 && $revision['status_id'] != 4) {
             $data['status_id'] = 4;
-            $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
+            $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
             $data['status_id'] = 5;
         }
 
@@ -46,7 +46,7 @@ class Ticket_model extends CI_Model {
         }
 
         if($data['status_id'] == 5 && $revision['status_id'] != 4) {
-            $this->ticket_model->update($ticket_id, $this->user->group_id, $data);
+            $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
         }
 
         $revision['comment'] = $data['comment'];
@@ -54,7 +54,7 @@ class Ticket_model extends CI_Model {
 
         $this->db->set($data);
         $this->db->where('ticket_id', $ticket_id);
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->update('tickets');
         if($this->db->affected_rows() || $revision['comment']) {
             $revision['updated_by'] = $this->user->user_id;
@@ -65,27 +65,27 @@ class Ticket_model extends CI_Model {
         return null;
     }
 
-    public function get($ticket_id, $group_id)
+    public function get($ticket_id, $team_id)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->from('tickets');
         $ticket = $this->db->get()->first_row();
         return $ticket;
     }
 
-    public function get_all($group_id)
+    public function get_all($team_id)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
         $this->db->order_by('created_at', 'desc');
         $tickets = $this->db->get()->result();
         return $tickets;
     }
 
-    public function query($group_id, $query)
+    public function query($team_id, $query)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         foreach ($this->fields as $field) {
             if(!empty($query[$field])) {
                 $this->db->where($field, $query[$field]);
@@ -124,9 +124,9 @@ class Ticket_model extends CI_Model {
         return $tickets;
     }
 
-    public function get_revisions($ticket_id, $group_id)
+    public function get_revisions($ticket_id, $team_id)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->from('revisions');
         $this->db->order_by('updated_at', 'desc');
@@ -144,20 +144,20 @@ class Ticket_model extends CI_Model {
         return null;
     }
 
-    private function get_next_ticket_id($group_id)
+    private function get_next_ticket_id($team_id)
     {
         $this->db->select('id');
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
         return $this->db->get()->num_rows() + 1;
     }
 
-    public function get_updated($limit, $group_id = null)
+    public function get_updated($limit, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
         $this->db->limit($limit);
         $this->db->order_by('updated_at', 'desc');
@@ -165,12 +165,12 @@ class Ticket_model extends CI_Model {
         return $tickets;
     }
 
-    public function get_new($limit, $group_id = null)
+    public function get_new($limit, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
         $this->db->limit($limit);
         $this->db->order_by('created_at', 'desc');
@@ -178,15 +178,15 @@ class Ticket_model extends CI_Model {
         return $tickets;
     }
 
-    public function get_counts_by_status($group_id = null)
+    public function get_counts_by_status($team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
         $this->db->select('status_id, COUNT(status_id) as count');
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
-        $this->db->group_by('status_id');
+        $this->db->order_by('status_id');
         $counts = $this->db->get()->result();
         return $counts;
     }

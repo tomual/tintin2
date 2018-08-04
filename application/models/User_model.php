@@ -10,7 +10,7 @@ class User_model extends CI_Model {
     }
 
     public function update($user) {
-        $this->db->set('group_id', $user->group_id);
+        $this->db->set('team_id', $user->team_id);
         $this->db->set('email', $user->email);
         $this->db->set('password', $user->password);
         $this->db->set('first_name', $user->first_name);
@@ -32,21 +32,21 @@ class User_model extends CI_Model {
         return null;
     }
 
-    public function get_first_name($user_id, $group_id = null)
+    public function get_first_name($user_id, $team_id = null)
     {
-        if(!$group_id) {
-            $group_id = $this->user->group_id;
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
         }
         $this->db->where('user_id', $user_id);
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('users');
         $user = $this->db->get()->first_row();
         return $user->first_name ?? null;
     }
 
-    public function get_all($group_id)
+    public function get_all($team_id)
     {
-        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
         $this->db->from('users');
         $users = $this->db->get()->result();
         return $users;
