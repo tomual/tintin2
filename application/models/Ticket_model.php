@@ -186,7 +186,7 @@ class Ticket_model extends CI_Model {
         $this->db->select('status_id, COUNT(status_id) as count');
         $this->db->where('team_id', $team_id);
         $this->db->from('tickets');
-        $this->db->order_by('status_id');
+        $this->db->group_by('status_id');
         $counts = $this->db->get()->result();
         return $counts;
     }

@@ -24,18 +24,22 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 -- Dumping structure for table tintin2.groups
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `owner_id` varchar(50) NOT NULL DEFAULT '0',
-  `name` varchar(50) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `team_id` int(11) DEFAULT NULL,
+  `label` int(11) DEFAULT NULL,
+  `ticket` enum('comment','create','edit','none') NOT NULL DEFAULT 'none',
+  `project` enum('create','edit','none') NOT NULL DEFAULT 'none',
+  `user` enum('create','edit','none') NOT NULL DEFAULT 'none',
+  `status` enum('create','edit','none') NOT NULL DEFAULT 'none',
+  `settings` enum('edit','none') NOT NULL DEFAULT 'none',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table tintin2.projects
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -44,14 +48,14 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `updated_by` int(11) DEFAULT NULL,
   `removed` enum('Y','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table tintin2.revisions
 CREATE TABLE IF NOT EXISTS `revisions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) NOT NULL DEFAULT '0',
-  `group_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   `comment` text,
@@ -63,31 +67,43 @@ CREATE TABLE IF NOT EXISTS `revisions` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table tintin2.statuses
 CREATE TABLE IF NOT EXISTS `statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
   `color` varchar(50) NOT NULL DEFAULT 'blue',
-  `cancelled` enum('Y','N') NOT NULL DEFAULT 'N',
-  `completed` enum('Y','N') NOT NULL DEFAULT 'N',
+  `cancel` enum('Y','N') NOT NULL DEFAULT 'N',
+  `complete` enum('Y','N') NOT NULL DEFAULT 'N',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int(11) DEFAULT NULL,
+  `removed` enum('Y','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+-- Dumping structure for table tintin2.teams
+CREATE TABLE IF NOT EXISTS `teams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_id` varchar(50) NOT NULL DEFAULT '0',
+  `name` varchar(50) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table tintin2.tickets
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -97,14 +113,14 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 -- Dumping structure for table tintin2.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `team_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` text NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -112,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
