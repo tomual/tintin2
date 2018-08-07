@@ -18,7 +18,6 @@ class User extends MY_Controller {
 
     public function signup()
     {
-        $this->load->helper(array('form', 'url'));
         if($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
@@ -65,7 +64,6 @@ class User extends MY_Controller {
 
     public function login()
     {
-        $this->load->helper(array('form', 'url'));
         if($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
@@ -103,7 +101,6 @@ class User extends MY_Controller {
 
     public function new()
     {
-        $this->load->helper(array('form', 'url'));
         if($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
@@ -129,6 +126,39 @@ class User extends MY_Controller {
                 }
             }
         }
-        $this->load->view('users/form');
+        $this->load->view('users/new');
+    }
+
+    public function edit($user_id)
+    {
+        $user = $this->user_model->get($user_id, $this->user->team_id);
+        if($this->input->method() == 'post') {
+            $this->load->library('form_validation');
+
+            $email = $this->input->post('email');
+            if ($email != $user->email) {
+                $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
+            } else {
+                $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            }
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+
+            if ($this->form_validation->run() !== FALSE)
+            {
+                $user->team_id = $this->user->team_id;
+                $user->email = $email;
+                $user->first_name = $this->input->post('first_name');
+                $user->last_name = $this->input->post('last_name');
+                if($password = $this->input->post('password')) {
+                    $user->password = password_hash($password, PASSWORD_DEFAULT);
+                }
+                $updated = $this->user_model->update($user);
+                if(!$updated) {
+                    $this->session->set_flashdata('error', 'There was an unknown issue creating the user.');
+                }
+            }
+        }
+        $this->load->view('users/edit', compact('user'));
     }
 }

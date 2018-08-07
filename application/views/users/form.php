@@ -1,35 +1,31 @@
-<?php $this->load->view('header') ?>
-<h1>New User</h1>
-<?php if ($this->session->flashdata('error')): ?>
-    <div class="error"><?php echo $this->session->flashdata('error') ?></div>
-<?php endif ?>
 <form method="post" class="form-signup">
     <div class="form-group">
         <label class="form-label" for="email">Email</label>
-        <input type="text" class="form-control" name="email" id="email" value="<?php echo set_value('email') ?>">
+        <input type="text" class="form-control <?php if(form_error('email')) echo 'is-invalid' ?>" name="email" id="email" value="<?php echo set_value('email', $user->email ?? null) ?>">
         <?php echo form_error('email') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="first_name">First Name</label>
-        <input type="text" class="form-control" name="first_name" id="first_name" value="<?php echo set_value('first_name') ?>">
+        <input type="text" class="form-control <?php if(form_error('first_name')) echo 'is-invalid' ?>" name="first_name" id="first_name" value="<?php echo set_value('first_name', $user->first_name ?? null) ?>">
         <?php echo form_error('first_name') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="last_name">Last Name</label>
-        <input type="text" class="form-control" name="last_name" id="last_name" value="<?php echo set_value('last_name') ?>">
+        <input type="text" class="form-control <?php if(form_error('last_name')) echo 'is-invalid' ?>" name="last_name" id="last_name" value="<?php echo set_value('last_name', $user->last_name ?? null) ?>">
         <?php echo form_error('last_name') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password" value="<?php echo set_value('password') ?>">
+        <input type="password" class="form-control <?php if(form_error('password')) echo 'is-invalid' ?>" name="password" id="password" value="">
         <?php echo form_error('password') ?>
     </div>
 
-    <input type="submit" value="Create" class="btn btn-primary">
-    <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
-
+    <?php if ($this->router->fetch_method() != 'new'): ?>
+        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+    <?php else: ?>
+        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+    <?php endif ?>
 </form>
-<?php $this->load->view('footer') ?>

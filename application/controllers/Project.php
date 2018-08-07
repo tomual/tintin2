@@ -27,8 +27,6 @@ class Project extends MY_Controller
 
     public function new()
     {
-        $this->load->helper(array('form', 'url'));
-
         $projects = $this->project_model->get_all($this->user->team_id);
 
         if ($this->input->method() == 'post') {
@@ -58,8 +56,6 @@ class Project extends MY_Controller
 
     public function edit($project_id)
     {
-        $this->load->helper(array('form', 'url'));
-
         $project = $this->project_model->get($project_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
