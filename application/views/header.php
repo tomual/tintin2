@@ -46,6 +46,7 @@
                         <li><a href="<?php echo base_url('project/all') ?>">Projects</a></li>
                         <li><a href="<?php echo base_url('status/all') ?>">Statuses</a></li>
                         <li><a href="<?php echo base_url('user/all') ?>">Users</a></li>
+                        <li><a href="<?php echo base_url('group/all') ?>">Groups</a></li>
                         <li><a href="<?php echo base_url('ticket/query') ?>">Search</a></li>
 <!--                        <li><a href="">Settings</a></li>-->
                     </ul>
