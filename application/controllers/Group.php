@@ -64,28 +64,18 @@ class Group extends MY_Controller
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('label', 'Label', 'required');
-            $this->form_validation->set_rules('description', 'Description', 'required');
 
             if ($this->form_validation->run() !== FALSE) {
-                $data = array(
-                    'label' => $this->input->post('label'),
-                    'description' => $this->input->post('description'),
-                );
-                $has_difference = false;
-                foreach ($data as $key => $value) {
-                    if ($data[$key] != $group->{$key}) {
-                        $has_difference = true;
-                    }
-                }
-                if ($has_difference) {
-                    $updated = $this->group_model->update($group_id, $this->user->team_id, $data);
-                    if ($updated) {
-                        redirect("ticket/group/{$group_id}");
-                    } else {
-                        $this->session->set_flashdata('error', 'There was an unknown error updating your group.');
-                    }
+                $label = $this->input->post('label');
+                $ticket = $this->input->post('ticket');
+                $project = $this->input->post('project');
+                $user = $this->input->post('user');
+                $settings = $this->input->post('settings');
+                $updated = $this->group_model->update($group_id, $this->user->team_id, $label, $ticket, $project, $user, $settings);
+                if ($updated) {
+                    redirect("group/all");
                 } else {
-                    $this->session->set_flashdata('error', 'No changes detected.');
+                    $this->session->set_flashdata('error', 'There was an unknown error updating your group.');
                 }
             }
         }

@@ -18,6 +18,22 @@ class Group_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function update($group_id, $team_id, $label, $ticket, $project, $user, $settings)
+    {
+        $data = array(
+            'label' => $label,
+            'ticket' => $ticket,
+            'project' => $project,
+            'user' => $user,
+            'settings' => $settings,
+        );
+        $this->db->set($data);
+        $this->db->where('group_id', $group_id);
+        $this->db->where('team_id', $team_id);
+        $this->db->update('groups');
+        return $this->db->affected_rows();
+    }
+
     private function get_next_group_id($team_id)
     {
         $this->db->select('id');
@@ -34,15 +50,6 @@ class Group_model extends CI_Model {
             return $ticket;
         }
         return null;
-    }
-
-    public function update($group_id, $team_id, $data)
-    {
-        $this->db->set($data);
-        $this->db->where('group_id', $group_id);
-        $this->db->where('team_id', $team_id);
-        $this->db->update('groups');
-        return $this->db->affected_rows();
     }
 
     public function delete($group_id, $team_id = null)

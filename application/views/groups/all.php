@@ -9,10 +9,11 @@
         <th></th>
     </tr>
     </thead>
-    <tbody class="sortable">
+    <tbody>
         <?php foreach($groups as $group): ?>
             <tr>
                 <td><a href="<?php echo base_url("group/edit/{$group->group_id}") ?>" class="text-inherit"><?php echo $group->label ?></a></td>
+                <td><a href="<?php echo base_url("group/users/{$group->group_id}") ?>" class="btn btn-sm btn-secondary">View Users</a></td>
             </tr>
         <?php endforeach ?>
     </tbody>

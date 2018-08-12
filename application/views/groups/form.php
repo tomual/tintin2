@@ -11,44 +11,89 @@
 
     <div class="form-group">
         <label class="form-label" for="ticket">Ticket</label>
-        <select class="form-control" name="ticket">
-            <option value="0">View</option>
-            <option value="1">Comment</option>
-            <option value="2">Create</option>
-            <option value="3">Edit</option>
-        </select>
+        <div class="selectgroup">
+            <label class="selectgroup-item">
+                <input name="ticket" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('ticket', '0', ($group->ticket ?? null) == '0' || empty($group->ticket)) ?>>
+                <span class="selectgroup-button">View</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="ticket" value="1" class="selectgroup-input" type="radio" <?php echo set_radio('ticket', '1', ($group->ticket ?? null) == '1') ?>>
+                <span class="selectgroup-button">Comment</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="ticket" value="2" class="selectgroup-input" type="radio" <?php echo set_radio('ticket', '2', ($group->ticket ?? null) == '2') ?>>
+                <span class="selectgroup-button">Create</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="ticket" value="3" class="selectgroup-input" type="radio" <?php echo set_radio('ticket', '3', ($group->ticket ?? null) == '3') ?>>
+                <span class="selectgroup-button">Edit</span>
+            </label>
+        </div>
         <?php echo form_error('ticket') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="project">Project</label>
-        <select class="form-control" name="project">
-            <option value="0">View</option>
-            <option value="2">Create</option>
-            <option value="3">Edit</option>
-        </select>
+        <div class="selectgroup">
+            <label class="selectgroup-item">
+                <input name="project" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('project', '0', ($group->project ?? null) == '0' || empty($group->project)) ?>>
+                <span class="selectgroup-button">View</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="project" value="2" class="selectgroup-input" type="radio" <?php echo set_radio('project', '2', ($group->project ?? null) == '2') ?>>
+                <span class="selectgroup-button">Create</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="project" value="3" class="selectgroup-input" type="radio" <?php echo set_radio('project', '3', ($group->project ?? null) == '3') ?>>
+                <span class="selectgroup-button">Edit</span>
+            </label>
+        </div>
         <?php echo form_error('project') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="user">User</label>
-        <select class="form-control" name="user">
-            <option value="0">None</option>
-            <option value="1">View</option>
-            <option value="2">Create</option>
-            <option value="3">Edit</option>
-        </select>
+        <div class="selectgroup">
+            <label class="selectgroup-item">
+                <input name="user" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('user', '0', ($group->user ?? null) == '0' || empty($group->user)) ?>>
+                <span class="selectgroup-button">None</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="user" value="1" class="selectgroup-input" type="radio" <?php echo set_radio('user', '1', ($group->user ?? null) == '1') ?>>
+                <span class="selectgroup-button">View</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="user" value="2" class="selectgroup-input" type="radio" <?php echo set_radio('user', '2', ($group->user ?? null) == '2') ?>>
+                <span class="selectgroup-button">Create</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="user" value="3" class="selectgroup-input" type="radio" <?php echo set_radio('user', '3', ($group->user ?? null) == '3') ?>>
+                <span class="selectgroup-button">Edit</span>
+            </label>
+        </div>
         <?php echo form_error('user') ?>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="settings">Settings</label>
-        <select class="form-control" name="settings">
-            <option value="0">None</option>
-            <option value="1">View</option>
-            <option value="2">Create</option>
-            <option value="3">Edit</option>
-        </select>
+        <div class="selectgroup">
+            <label class="selectgroup-item">
+                <input name="settings" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('settings', '0', ($group->settings ?? null) == '0' || empty($group->settings)) ?>>
+                <span class="selectgroup-button">None</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="settings" value="1" class="selectgroup-input" type="radio" <?php echo set_radio('settings', '1', ($group->settings ?? null) == '1') ?>>
+                <span class="selectgroup-button">View</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="settings" value="2" class="selectgroup-input" type="radio" <?php echo set_radio('settings', '2', ($group->settings ?? null) == '2') ?>>
+                <span class="selectgroup-button">Create</span>
+            </label>
+            <label class="selectgroup-item">
+                <input name="settings" value="3" class="selectgroup-input" type="radio" <?php echo set_radio('settings', '3', ($group->settings ?? null) == '3') ?>>
+                <span class="selectgroup-button">Edit</span>
+            </label>
+        </div>
         <?php echo form_error('settings') ?>
         <div class="small text-muted">Groups, statuses</div>
     </div>
