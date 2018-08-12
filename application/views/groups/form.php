@@ -12,10 +12,10 @@
     <div class="form-group">
         <label class="form-label" for="ticket">Ticket</label>
         <select class="form-control" name="ticket">
-            <option value="none">View tickets</option>
-            <option value="comment">Comment on tickets</option>
-            <option value="create">Create tickets & edit own</option>
-            <option value="edit">Edit tickets</option>
+            <option value="0">View</option>
+            <option value="1">Comment</option>
+            <option value="2">Create</option>
+            <option value="3">Edit</option>
         </select>
         <?php echo form_error('ticket') ?>
     </div>
@@ -23,9 +23,9 @@
     <div class="form-group">
         <label class="form-label" for="project">Project</label>
         <select class="form-control" name="project">
-            <option value="none">View projects</option>
-            <option value="create">Create projects & edit own</option>
-            <option value="edit">Edit projects</option>
+            <option value="0">View</option>
+            <option value="2">Create</option>
+            <option value="3">Edit</option>
         </select>
         <?php echo form_error('project') ?>
     </div>
@@ -33,8 +33,10 @@
     <div class="form-group">
         <label class="form-label" for="user">User</label>
         <select class="form-control" name="user">
-            <option value="none">View users</option>
-            <option value="edit">Edit tickets</option>
+            <option value="0">None</option>
+            <option value="1">View</option>
+            <option value="2">Create</option>
+            <option value="3">Edit</option>
         </select>
         <?php echo form_error('user') ?>
     </div>
@@ -42,9 +44,10 @@
     <div class="form-group">
         <label class="form-label" for="settings">Settings</label>
         <select class="form-control" name="settings">
-            <option value="none">None</option>
-            <option value="view">View</option>
-            <option value="edit">Edit</option>
+            <option value="0">None</option>
+            <option value="1">View</option>
+            <option value="2">Create</option>
+            <option value="3">Edit</option>
         </select>
         <?php echo form_error('settings') ?>
         <div class="small text-muted">Groups, statuses</div>
