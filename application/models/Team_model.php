@@ -55,6 +55,31 @@ class Team_model extends CI_Model {
             $this->db->insert('statuses', $status);
         }
 
+        $groups = array(
+            array(
+                'group_id' => 1,
+                'team_id' => $team_id,
+                'label' => 'Admin',
+                'ticket' => 3,
+                'project' => 3,
+                'user' => 3,
+                'settings' => 3,
+            ),
+            array(
+                'group_id' => 2,
+                'team_id' => $team_id,
+                'label' => 'User',
+                'ticket' => 2,
+                'project' => 1,
+                'user' => 1,
+                'settings' => 1,
+            )
+        );
+
+        foreach ($groups as $group) {
+            $this->db->insert('groups', $group);
+        }
+
         return $team_id;
     }
 }

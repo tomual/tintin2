@@ -108,11 +108,13 @@ class User extends MY_Controller {
             $this->form_validation->set_rules('first_name', 'First Name', 'required');
             $this->form_validation->set_rules('last_name', 'Last Name', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('group_id', 'Group', 'required');
 
             if ($this->form_validation->run() !== FALSE)
             {
                 $data = array(
                     'team_id' => $this->user->team_id,
+                    'group_id' => $this->input->post('group_id'),
                     'email' => $this->input->post('email'),
                     'password' => $this->input->post('password'),
                     'first_name' => $this->input->post('first_name'),
@@ -143,10 +145,12 @@ class User extends MY_Controller {
             }
             $this->form_validation->set_rules('first_name', 'First Name', 'required');
             $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('group_id', 'Group', 'required');
 
             if ($this->form_validation->run() !== FALSE)
             {
                 $user->team_id = $this->user->team_id;
+                $user->group_id = $this->input->post('group_id');
                 $user->email = $email;
                 $user->first_name = $this->input->post('first_name');
                 $user->last_name = $this->input->post('last_name');

@@ -11,6 +11,7 @@ class User_model extends CI_Model {
 
     public function update($user) {
         $this->db->set('team_id', $user->team_id);
+        $this->db->set('group_id', $user->group_id);
         $this->db->set('email', $user->email);
         $this->db->set('password', $user->password);
         $this->db->set('first_name', $user->first_name);
