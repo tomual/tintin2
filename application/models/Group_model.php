@@ -99,4 +99,14 @@ class Group_model extends CI_Model {
         $group = $this->db->get()->first_row();
         return $group->label ?? null;
     }
+
+    public function has_permission($permission, $level)
+    {
+        $group = $this->get($this->user->group_id, $this->user->team_id);
+
+        if (!empty($group) && $group->{$permission} >= $level) {
+            return true;
+        }
+        return false;
+    }
 }
