@@ -53,6 +53,20 @@ function get_project_label($project_id)
     return 'Unknown';
 }
 
+function get_group_label($group_id)
+{
+    $CI =& get_instance();
+    if (!$group_id) {
+        return null;
+    }
+    foreach ($CI->groups as $group) {
+        if ($group->group_id == $group_id) {
+            return $group->label;
+        }
+    }
+    return 'Unknown';
+}
+
 function get_user_first_name($user_id)
 {
     $CI =& get_instance();

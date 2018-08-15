@@ -23,9 +23,19 @@ class MY_Controller extends CI_Controller
             if (empty($this->projects)) {
                 $this->projects = $this->project_model->get_all($this->user->team_id);
             }
+            if (empty($this->groups)) {
+                $this->groups = $this->group_model->get_all($this->user->team_id);
+            }
             if (empty($this->updated)) {
                 $this->updated = $this->ticket_model->get_updated(5);
             }
+        }
+    }
+
+    public function check_permission($permission, $level) {
+        if (!$this->group_model->has_permission($permission, $level)) {
+            $this->session->set_flashdata('error', 'You do not have permission to perform this operation.');
+            redirect('/');
         }
     }
 }

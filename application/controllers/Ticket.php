@@ -46,6 +46,7 @@ class Ticket extends MY_Controller
 
     public function new()
     {
+        $this->check_permission('tickets', 3);
         $this->load->helper(array('form', 'url'));
 
         if ($this->input->method() == 'post') {

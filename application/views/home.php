@@ -1,4 +1,12 @@
 <?php $this->load->view('header') ?>
+
+<?php if ($this->session->flashdata('error')): ?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <?php echo $this->session->flashdata('error') ?>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php endif ?>
+
 <h1>Welcome back, <?php echo $this->user->first_name ?></h1>
 <p>Tintin is an open source ticketing system - last updated June 9th, 2018.</p>
 <?php if($summary): ?>
