@@ -36,7 +36,7 @@
         <label class="form-label" for="project">Project</label>
         <div class="selectgroup">
             <label class="selectgroup-item">
-                <input name="project" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('project', '0', ($group->project ?? null) == '0' || empty($group->project)) ?>>
+                <input name="project" value="1" class="selectgroup-input" type="radio" <?php echo set_radio('project', '0', ($group->project ?? null) == '0' || empty($group->project)) ?>>
                 <span class="selectgroup-button">View</span>
             </label>
             <label class="selectgroup-item">

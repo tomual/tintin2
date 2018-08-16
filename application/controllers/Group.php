@@ -79,7 +79,7 @@ class Group extends MY_Controller
                 }
             }
         }
-        $this->load->view('groups/edit', compact('group', 'statuses'));
+        $this->load->view('groups/edit', compact('group'));
     }
 
     public function delete($group_id)
@@ -92,5 +92,11 @@ class Group extends MY_Controller
                 $this->session->set_flashdata('error', 'There was an unknown error deleting your group.');
             }
         }
+    }
+
+    public function users($group_id)
+    {
+        $users = $this->user_model->get_by_group_id($group_id);
+        $this->load->view('groups/users', compact('group_id', 'users'));
     }
 }

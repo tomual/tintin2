@@ -67,6 +67,29 @@ function get_group_label($group_id)
     return 'Unknown';
 }
 
+function get_permission_label($permission, $level)
+{
+    $levels_default = array(
+        '0' => 'None',
+        '1' => 'View', 
+        '2' => 'Create',
+        '3' => 'Edit' 
+    );
+
+    $levels_ticket = array(
+        '0' => 'None',
+        '1' => 'Comment',
+        '2' => 'View', 
+        '3' => 'Create',
+        '4' => 'Edit' 
+    );
+
+    if ($permission == 'ticket') {
+        return $levels_ticket[$level] ?? '-';
+    }
+    return $levels_default[$level] ?? '-';
+}
+
 function get_user_first_name($user_id)
 {
     $CI =& get_instance();

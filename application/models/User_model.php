@@ -64,4 +64,17 @@ class User_model extends CI_Model {
         $project = $this->db->get()->first_row();
         return $project;
     }
+
+    public function get_by_group_id($group_id, $team_id = null)
+    {
+        if(!$team_id) {
+            $team_id = $this->user->team_id;
+        }
+        $this->db->where('team_id', $team_id);
+        $this->db->where('group_id', $group_id);
+        $this->db->from('users');
+        $users = $this->db->get()->result();
+
+        return $users;
+    }
 }
