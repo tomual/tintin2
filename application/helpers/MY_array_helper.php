@@ -53,13 +53,12 @@ function get_project_label($project_id)
     return 'Unknown';
 }
 
-function get_group_label($group_id)
+function get_group_label($groups, $group_id)
 {
-    $CI =& get_instance();
     if (!$group_id) {
         return null;
     }
-    foreach ($CI->groups as $group) {
+    foreach ($groups as $group) {
         if ($group->group_id == $group_id) {
             return $group->label;
         }
@@ -77,11 +76,10 @@ function get_permission_label($permission, $level)
     );
 
     $levels_ticket = array(
-        '0' => 'None',
-        '1' => 'Comment',
-        '2' => 'View', 
-        '3' => 'Create',
-        '4' => 'Edit' 
+        '0' => 'Comment',
+        '1' => 'View', 
+        '2' => 'Create',
+        '3' => 'Edit' 
     );
 
     if ($permission == 'ticket') {

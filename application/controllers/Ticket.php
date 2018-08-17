@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ticket extends MY_Controller
 {
@@ -22,7 +22,7 @@ class Ticket extends MY_Controller
 
     public function all()
     {
-        if($this->input->get()) {
+        if ($this->input->get()) {
             $tickets = $this->ticket_model->query($this->user->team_id, $this->input->get());
         } else {
             $tickets = $this->ticket_model->get_all($this->user->team_id);
@@ -44,9 +44,8 @@ class Ticket extends MY_Controller
         $this->load->view('tickets/status', compact('tickets', 'status'));
     }
 
-    public function new()
-    {
-        $this->check_permission('tickets', 3);
+    function new () {
+        $this->check_permission('tickets', 2);
         $this->load->helper(array('form', 'url'));
 
         if ($this->input->method() == 'post') {
@@ -55,7 +54,7 @@ class Ticket extends MY_Controller
             $this->form_validation->set_rules('title', 'Title', 'required');
             $this->form_validation->set_rules('description', 'Description', 'required');
 
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() !== false) {
                 $title = $this->input->post('title');
                 $description = $this->input->post('description');
                 $project_id = $this->input->post('project_id');
@@ -88,21 +87,26 @@ class Ticket extends MY_Controller
             $this->form_validation->set_rules('description', 'Description', 'required');
             $this->form_validation->set_rules('status_id', 'Status', 'required');
 
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() !== false) {
                 $data = array(
                     'title' => $this->input->post('title'),
                     'description' => $this->input->post('description'),
                     'comment' => $this->input->post('comment'),
                     'status_id' => $this->input->post('status_id'),
-                    'project_id' => $this->input->post('project_id')
+                    'project_id' => $this->input->post('project_id'),
                 );
                 $has_difference = false;
-                foreach($data as $key => $value) {
-                    if(!empty($ticket->{$key}) && $data[$key] != $ticket->{$key}) {
+                foreach ($data as $key => $value) {
+                    if (!empty($ticket->{$key}) && $data[$key] != $ticket->{$key}) {
                         $has_difference = true;
                     }
                 }
-                if($has_difference || $data['comment']) {
+                if ($has_difference || $data['comment']) {
+                    if ($has_difference) {
+                        $this->check_permission('tickets', 3);
+                    } else {
+                        $this->check_permission('tickets', 2);
+                    }
                     $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/view/{$ticket_id}");
@@ -119,6 +123,7 @@ class Ticket extends MY_Controller
 
     public function quick($ticket_id)
     {
+        $this->check_permission('tickets', 3);
         $this->load->helper(array('form', 'url'));
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
@@ -128,18 +133,23 @@ class Ticket extends MY_Controller
 
             $this->form_validation->set_rules('status_id', 'Status', 'required');
 
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() !== false) {
                 $data = array(
                     'status_id' => $this->input->post('status_id'),
                     'comment' => $this->input->post('comment'),
                 );
                 $has_difference = false;
-                foreach($data as $key => $value) {
-                    if($data[$key] != $ticket->{$key}) {
+                foreach ($data as $key => $value) {
+                    if ($data[$key] != $ticket->{$key}) {
                         $has_difference = true;
                     }
                 }
-                if($has_difference || $data['comment']) {
+                if ($has_difference || $data['comment']) {
+                    if ($has_difference) {
+                        $this->check_permission('tickets', 3);
+                    } else {
+                        $this->check_permission('tickets', 2);
+                    }
                     $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/view/{$ticket_id}");
@@ -160,7 +170,7 @@ class Ticket extends MY_Controller
         $this->load->view('tickets/query', compact('tickets'));
     }
 
-    public function ajax_search() 
+    public function ajax_search()
     {
         $tickets = $this->ticket_model->query($this->user->team_id, $this->input->post());
         foreach ($tickets as $key => $ticket) {
