@@ -27,6 +27,7 @@ class Status extends MY_Controller
 
     public function new()
     {
+        $this->check_permission('settings', 3);
         $this->load->helper(array('form', 'url'));
 
         $statuses = $this->status_model->get_all($this->user->team_id);
@@ -62,6 +63,7 @@ class Status extends MY_Controller
 
     public function edit($status_id)
     {
+        $this->check_permission('settings', 3);
         $this->load->helper(array('form', 'url'));
 
         $status = $this->status_model->get($status_id, $this->user->team_id);
@@ -104,6 +106,7 @@ class Status extends MY_Controller
 
     public function delete($status_id)
     {
+        $this->check_permission('settings', 3);
         if ($this->input->method() == 'post') {
             $deleted = $this->status_model->delete($status_id);
             if ($deleted) {
@@ -115,6 +118,7 @@ class Status extends MY_Controller
     }
 
     public function ajax_set_order() {
+        $this->check_permission('settings', 3);
         if ($this->input->method() == 'post') {
             $data = $this->input->post('data');
             $updated = $this->status_model->set_order($data);

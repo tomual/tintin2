@@ -45,7 +45,7 @@ class Ticket extends MY_Controller
     }
 
     function new () {
-        $this->check_permission('tickets', 2);
+        $this->check_permission('ticket', 2);
         $this->load->helper(array('form', 'url'));
 
         if ($this->input->method() == 'post') {
@@ -103,9 +103,9 @@ class Ticket extends MY_Controller
                 }
                 if ($has_difference || $data['comment']) {
                     if ($has_difference) {
-                        $this->check_permission('tickets', 3);
+                        $this->check_permission('ticket', 3);
                     } else {
-                        $this->check_permission('tickets', 2);
+                        $this->check_permission('ticket', 2);
                     }
                     $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
@@ -123,7 +123,7 @@ class Ticket extends MY_Controller
 
     public function quick($ticket_id)
     {
-        $this->check_permission('tickets', 3);
+        $this->check_permission('ticket', 3);
         $this->load->helper(array('form', 'url'));
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
@@ -146,9 +146,9 @@ class Ticket extends MY_Controller
                 }
                 if ($has_difference || $data['comment']) {
                     if ($has_difference) {
-                        $this->check_permission('tickets', 3);
+                        $this->check_permission('ticket', 3);
                     } else {
-                        $this->check_permission('tickets', 2);
+                        $this->check_permission('ticket', 2);
                     }
                     $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {

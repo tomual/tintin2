@@ -27,6 +27,7 @@ class Project extends MY_Controller
 
     public function new()
     {
+        $this->check_permission('project', 2);
         $projects = $this->project_model->get_all($this->user->team_id);
 
         if ($this->input->method() == 'post') {
@@ -56,6 +57,7 @@ class Project extends MY_Controller
 
     public function edit($project_id)
     {
+        $this->check_permission('project', 3);
         $project = $this->project_model->get($project_id, $this->user->team_id);
 
         if ($this->input->method() == 'post') {
@@ -92,6 +94,7 @@ class Project extends MY_Controller
 
     public function delete($project_id)
     {
+        $this->check_permission('project', 3);
         if ($this->input->method() == 'post') {
             $deleted = $this->project_model->delete($project_id);
             if ($deleted) {
