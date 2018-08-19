@@ -95,7 +95,7 @@ function get_user_first_name($user_id)
         return null;
     }
     foreach ($CI->users as $user) {
-        if ($user->user_id == $user_id) {
+        if ($user->id == $user_id) {
             return $user->first_name;
         }
     }

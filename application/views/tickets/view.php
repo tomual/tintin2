@@ -5,7 +5,7 @@
     <table class="table mt-5 w-25">
         <tr>
             <th width="120">Author</th>
-            <td><?php echo get_user_first_name($ticket->user_id) ?></td>
+            <td><?php echo get_user_first_name($ticket->created_by) ?></td>
         </tr>
         <tr>
             <th>Created at</th>

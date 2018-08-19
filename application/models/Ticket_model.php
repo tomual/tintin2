@@ -22,7 +22,7 @@ class Ticket_model extends CI_Model {
             'description' => $description,
             'status_id' => 1,
             'project_id' => $project_id,
-            'user_id' => $this->user->user_id,
+            'created_by' => $this->user->id,
             'team_id' => $this->user->team_id,
         );
         $this->db->insert('tickets', $data);
@@ -40,7 +40,7 @@ class Ticket_model extends CI_Model {
         }
 
         if($data['status_id'] == 4) {
-            $data['worker_id'] = $this->user->user_id;
+            $data['worker_id'] = $this->user->id;
         } elseif($data['status_id'] != 5) {
             $data['worker_id'] = null;
         }
@@ -52,12 +52,14 @@ class Ticket_model extends CI_Model {
         $revision['comment'] = $data['comment'];
         unset($data['comment']);
 
+        $data['updated_by'] = $this->user->id;
+
         $this->db->set($data);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->where('team_id', $team_id);
         $this->db->update('tickets');
         if($this->db->affected_rows() || $revision['comment']) {
-            $revision['updated_by'] = $this->user->user_id;
+            $revision['updated_by'] = $this->user->id;
             unset($revision['id']);
             $this->db->insert('revisions', $revision);
             return $this->db->insert_id();

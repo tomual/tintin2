@@ -44,7 +44,7 @@ class Ticket extends MY_Controller
         $this->load->view('tickets/status', compact('tickets', 'status'));
     }
 
-    function new () {
+    function new() {
         $this->check_permission('ticket', 2);
         $this->load->helper(array('form', 'url'));
 
@@ -79,6 +79,9 @@ class Ticket extends MY_Controller
         $this->load->helper(array('form', 'url'));
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
+        if (!$this->is_author($ticket->created_by, $this->user->id)) {
+            $this->check_permission('ticket', 3);
+        }
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -102,11 +105,6 @@ class Ticket extends MY_Controller
                     }
                 }
                 if ($has_difference || $data['comment']) {
-                    if ($has_difference) {
-                        $this->check_permission('ticket', 3);
-                    } else {
-                        $this->check_permission('ticket', 2);
-                    }
                     $updated = $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
                     if ($updated) {
                         redirect("ticket/view/{$ticket_id}");
@@ -123,10 +121,12 @@ class Ticket extends MY_Controller
 
     public function quick($ticket_id)
     {
-        $this->check_permission('ticket', 3);
         $this->load->helper(array('form', 'url'));
 
         $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
+        if (!$this->is_author($ticket->created_by, $this->user->id)) {
+            $this->check_permission('ticket', 3);
+        }
 
         if ($this->input->method() == 'post') {
             $this->load->library('form_validation');
@@ -145,7 +145,7 @@ class Ticket extends MY_Controller
                     }
                 }
                 if ($has_difference || $data['comment']) {
-                    if ($has_difference) {
+                    if ($has_difference && !$this->is_author($ticket->created_by, $this->user->id)) {
                         $this->check_permission('ticket', 3);
                     } else {
                         $this->check_permission('ticket', 2);
@@ -179,5 +179,9 @@ class Ticket extends MY_Controller
         }
         header('Content-Type: application/json');
         echo json_encode($tickets);
+    }
+
+    private function is_author($created_by, $user_id) {
+        return $created_by == $user_id;
     }
 }
