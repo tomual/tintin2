@@ -161,8 +161,11 @@ class User extends MY_Controller {
                 }
                 $updated = $this->user_model->update($user);
                 if(!$updated) {
-                    $this->session->set_flashdata('error', 'There was an unknown issue creating the user.');
+                    $this->session->set_flashdata('error', 'No changes were made.');
+                } else {
+                    $this->session->set_flashdata('success', 'User has been updated.');
                 }
+                redirect("user/edit/$user_id");
             }
         }
         $groups = $this->group_model->get_all($this->user->team_id);

@@ -1,3 +1,4 @@
+<?php echo alerts() ?>
 <form method="post">
     <div class="form-group">
         <label class="form-label" for="title">Title</label>

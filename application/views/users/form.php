@@ -1,3 +1,4 @@
+<?php echo alerts() ?>
 <form method="post" class="form-signup">
     <div class="form-group">
         <label class="form-label" for="email">Email</label>

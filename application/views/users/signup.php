@@ -1,8 +1,6 @@
 <?php $this->load->view('header') ?>
 <h1>Sign Up</h1>
-<?php if ($this->session->flashdata('error')): ?>
-    <div class="error"><?php echo $this->session->flashdata('error') ?></div>
-<?php endif ?>
+<?php echo alerts() ?>
 <form method="post" class="form-signup">
     <div class="form-group">
         <label class="form-label" for="name">Group Name</label>
