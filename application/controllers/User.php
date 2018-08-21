@@ -95,8 +95,9 @@ class User extends MY_Controller {
 
     public function all()
     {
+        $groups = $this->group_model->get_all($this->user->team_id);
         $users = $this->user_model->get_all($this->user->team_id);
-        $this->load->view('users/all', compact('users'));
+        $this->load->view('users/all', compact('users', 'groups'));
     }
 
     public function new()
@@ -128,7 +129,8 @@ class User extends MY_Controller {
                 }
             }
         }
-        $this->load->view('users/new');
+        $groups = $this->group_model->get_all($this->user->team_id);
+        $this->load->view('users/new', compact('groups'));
     }
 
     public function edit($user_id)
@@ -163,6 +165,7 @@ class User extends MY_Controller {
                 }
             }
         }
-        $this->load->view('users/edit', compact('user'));
+        $groups = $this->group_model->get_all($this->user->team_id);
+        $this->load->view('users/edit', compact('user', 'groups'));
     }
 }

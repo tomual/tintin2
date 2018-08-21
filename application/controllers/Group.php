@@ -96,7 +96,8 @@ class Group extends MY_Controller
 
     public function users($group_id)
     {
+        $groups = $this->group_model->get_all($this->user->team_id);
         $users = $this->user_model->get_by_group_id($group_id);
-        $this->load->view('groups/users', compact('group_id', 'users'));
+        $this->load->view('groups/users', compact('group_id', 'users', 'groups'));
     }
 }

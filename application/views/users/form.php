@@ -18,14 +18,25 @@
     </div>
 
     <div class="form-group">
+        <label class="form-label" for="project_id">Group</label>
+        <select class="selectize form-control  <?php if (form_error('group_id')) echo 'is-invalid' ?>" name="group_id" id="group_id">
+            <option value="">No group</option>
+            <?php foreach ($groups as $group): ?>
+                <option value="<?php echo $group->group_id ?>" <?php echo set_select('group_id', $group->group_id, ($user->group_id ?? null) == $group->group_id) ?>><?php echo $group->label ?></option>
+            <?php endforeach ?>
+        </select>
+        <?php echo form_error('group_id') ?>
+    </div>
+
+    <div class="form-group">
         <label class="form-label" for="password">Password</label>
         <input type="password" class="form-control <?php if(form_error('password')) echo 'is-invalid' ?>" name="password" id="password" value="">
         <?php echo form_error('password') ?>
     </div>
 
     <?php if ($this->router->fetch_method() != 'new'): ?>
-        <input type="submit" value="Update" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+        <input type="submit" value="Update" class="btn btn-primary"> <a href="<?php echo base_url('user/all') ?>" class="btn btn-secondary">Cancel</a>
     <?php else: ?>
-        <input type="submit" value="Create" class="btn btn-primary"> <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+        <input type="submit" value="Create" class="btn btn-primary"> <a href="<?php echo base_url('user/all') ?>" class="btn btn-secondary">Cancel</a>
     <?php endif ?>
 </form>
