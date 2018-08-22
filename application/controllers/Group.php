@@ -21,7 +21,7 @@ class Group extends MY_Controller
 
     public function all()
     {
-        $groups = $this->group_model->get_all($this->user->team_id);
+        $groups = $this->group_model->get_all($this->user->team_id, true);
         $this->load->view('groups/all', compact('groups'));
     }
 
@@ -87,10 +87,11 @@ class Group extends MY_Controller
         if ($this->input->method() == 'post') {
             $deleted = $this->group_model->delete($group_id);
             if ($deleted) {
-                redirect("group/all");
+                $this->session->set_flashdata('success', 'Group has been deleted.');
             } else {
                 $this->session->set_flashdata('error', 'There was an unknown error deleting your group.');
             }
+            redirect("group/all");
         }
     }
 

@@ -2,7 +2,7 @@
 <div class="ticket">
     <h1 class="d-inline"><small class="text-muted">#<?php echo $ticket->ticket_id ?></small> <?php echo $ticket->title ?></h1>
     <a href="<?php echo base_url("ticket/edit/{$ticket->ticket_id}") ?>" class="btn btn-sm btn-secondary ml-3 align-super">Edit Ticket</a>
-    <table class="table mt-5 w-25">
+    <table class="table mt-5">
         <tr>
             <th width="120">Author</th>
             <td><?php echo get_user_first_name($ticket->created_by) ?></td>
@@ -28,29 +28,31 @@
     </table>
     <div class="description p-5"><?php echo $ticket->description ?></div>
 
-    <hr>
-    <style>
-    </style>
-    <h3>Quick Update</h3>
-    <form method="post" action="<?php echo base_url("ticket/quick/{$ticket->ticket_id}") ?>">
-        <div class="form-group">
-            <label class="form-label" for="">Status</label>
-            <div class="selectgroup w-100">
-                <?php foreach ($this->statuses as $status): ?>
-                    <label class="selectgroup-item">
-                        <input name="status_id" value="<?php echo $status->status_id ?>" <?php echo $ticket->status_id == $status->status_id ? 'checked' : '' ?> class="selectgroup-input" type="radio">
-                        <span class="selectgroup-button"><?php echo $status->label ?></span>
-                    </label>
-                <?php endforeach ?>
+    <?php if ($this->group_model->has_permission('ticket', 3)): ?>
+        <hr>
+        <h3>Quick Update</h3>
+        <form method="post" action="<?php echo base_url("ticket/quick/{$ticket->ticket_id}") ?>">
+            <div class="form-group">
+                <label class="form-label" for="">Status</label>
+                <div class="selectgroup w-100">
+                    <?php foreach ($this->statuses as $status): ?>
+                        <label class="selectgroup-item">
+                            <input name="status_id" value="<?php echo $status->status_id ?>" <?php echo $ticket->status_id == $status->status_id ? 'checked' : '' ?> class="selectgroup-input" type="radio">
+                            <span class="selectgroup-button"><?php echo $status->label ?></span>
+                        </label>
+                    <?php endforeach ?>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label class="form-label" for="comment">Comment</label>
-            <textarea class="ckeditor ckeditor-small form-control" name="comment" id="comment"></textarea>
-        </div>
-        <input type="submit" value="Update" class="btn btn-primary mt-1">
-    </form>    <hr>
+            <div class="form-group">
+                <label class="form-label" for="comment">Comment</label>
+                <textarea class="ckeditor ckeditor-small form-control" name="comment" id="comment"></textarea>
+            </div>
+            <input type="submit" value="Update" class="btn btn-primary mt-1">
+        </form>
+    <?php endif ?>
+
+    <hr>
 
     <h3 class="mt-3">Revisions</h3>
     <?php if(!$revisions): ?>

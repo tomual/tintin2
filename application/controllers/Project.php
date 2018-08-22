@@ -98,10 +98,11 @@ class Project extends MY_Controller
         if ($this->input->method() == 'post') {
             $deleted = $this->project_model->delete($project_id);
             if ($deleted) {
-                redirect("project/all");
+                $this->session->set_flashdata('success', 'Project has been deleted.');
             } else {
                 $this->session->set_flashdata('error', 'There was an unknown error deleting your project.');
             }
+            redirect("project/all");
         }
     }
 }

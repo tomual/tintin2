@@ -1,5 +1,6 @@
 <?php $this->load->view('header') ?>
 <h1>Groups</h1>
+<?php echo alerts() ?>
 <br>
 <a href="<?php echo base_url('group/new') ?>" class="btn btn-primary">New Group</a>
 <table class="table table-hover table-vcenter mt-3">
