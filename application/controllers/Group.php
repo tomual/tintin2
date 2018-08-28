@@ -38,9 +38,8 @@ class Group extends MY_Controller
                 $label = $this->input->post('label');
                 $ticket = $this->input->post('ticket');
                 $project = $this->input->post('project');
-                $user = $this->input->post('user');
                 $settings = $this->input->post('settings');
-                $id = $this->group_model->create($label, $ticket, $project, $user, $settings);
+                $id = $this->group_model->create($label, $ticket, $project, $settings);
                 if ($id) {
                     $group = $this->group_model->get_by_unique_id($id);
                     if ($id) {
@@ -69,9 +68,8 @@ class Group extends MY_Controller
                 $label = $this->input->post('label');
                 $ticket = $this->input->post('ticket');
                 $project = $this->input->post('project');
-                $user = $this->input->post('user');
                 $settings = $this->input->post('settings');
-                $updated = $this->group_model->update($group_id, $this->user->team_id, $label, $ticket, $project, $user, $settings);
+                $updated = $this->group_model->update($group_id, $this->user->team_id, $label, $ticket, $project, $settings);
                 if ($updated) {
                     redirect("group/all");
                 } else {

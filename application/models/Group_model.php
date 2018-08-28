@@ -3,14 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Group_model extends CI_Model {
 
-    public function create($label, $ticket, $project, $user, $settings) {
+    public function create($label, $ticket, $project, $settings) {
         $data = array(
             'group_id' => $this->get_next_group_id($this->user->team_id),
             'team_id' => $this->user->team_id,
             'label' => $label,
             'ticket' => $ticket,
             'project' => $project,
-            'user' => $user,
             'settings' => $settings,
             'created_by' => $this->user->user_id
         );
@@ -18,13 +17,12 @@ class Group_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    public function update($group_id, $team_id, $label, $ticket, $project, $user, $settings)
+    public function update($group_id, $team_id, $label, $ticket, $project, $settings)
     {
         $data = array(
             'label' => $label,
             'ticket' => $ticket,
             'project' => $project,
-            'user' => $user,
             'settings' => $settings,
         );
         $this->db->set($data);

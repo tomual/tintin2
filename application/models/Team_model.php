@@ -62,8 +62,8 @@ class Team_model extends CI_Model {
                 'label' => 'Admin',
                 'ticket' => 3,
                 'project' => 3,
-                'user' => 3,
                 'settings' => 3,
+                'removed' => 'N',
             ),
             array(
                 'group_id' => 2,
@@ -71,8 +71,8 @@ class Team_model extends CI_Model {
                 'label' => 'User',
                 'ticket' => 2,
                 'project' => 1,
-                'user' => 1,
                 'settings' => 1,
+                'removed' => 'N',
             )
         );
 

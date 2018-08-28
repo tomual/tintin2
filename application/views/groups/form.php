@@ -53,29 +53,6 @@
     </div>
 
     <div class="form-group">
-        <label class="form-label" for="user">User</label>
-        <div class="selectgroup">
-            <label class="selectgroup-item">
-                <input name="user" value="0" class="selectgroup-input" type="radio" <?php echo set_radio('user', '0', ($group->user ?? null) == '0' || empty($group->user)) ?>>
-                <span class="selectgroup-button">None</span>
-            </label>
-            <label class="selectgroup-item">
-                <input name="user" value="1" class="selectgroup-input" type="radio" <?php echo set_radio('user', '1', ($group->user ?? null) == '1') ?>>
-                <span class="selectgroup-button">View</span>
-            </label>
-            <label class="selectgroup-item">
-                <input name="user" value="2" class="selectgroup-input" type="radio" <?php echo set_radio('user', '2', ($group->user ?? null) == '2') ?>>
-                <span class="selectgroup-button">Create</span>
-            </label>
-            <label class="selectgroup-item">
-                <input name="user" value="3" class="selectgroup-input" type="radio" <?php echo set_radio('user', '3', ($group->user ?? null) == '3') ?>>
-                <span class="selectgroup-button">Edit</span>
-            </label>
-        </div>
-        <?php echo form_error('user') ?>
-    </div>
-
-    <div class="form-group">
         <label class="form-label" for="settings">Settings</label>
         <div class="selectgroup">
             <label class="selectgroup-item">

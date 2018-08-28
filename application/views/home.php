@@ -7,9 +7,9 @@
 </div>
 <?php endif ?>
 
+<?php if($summary): ?>
 <h1>Welcome back, <?php echo $this->user->first_name ?></h1>
 <p>Tintin is an open source ticketing system - last updated June 9th, 2018.</p>
-<?php if($summary): ?>
 <h3 class="mt-7">Tickets Summary</h3>
 <div class="row row-cards">
     <?php foreach ($summary as $count): ?>
@@ -47,6 +47,8 @@
     </tbody>
 </table>
 <?php else: ?>
+    <h1>Welcome, <?php echo $this->user->first_name ?></h1>
+    <p>Tintin is an open source ticketing system - last updated June 9th, 2018.</p>
     <a href="<?php echo base_url('ticket/new') ?>" class="btn btn-primary mt-4">Create your first ticket</a>
 <?php endif ?>
 <?php $this->load->view('footer') ?>

@@ -46,6 +46,7 @@ class User extends MY_Controller {
                         $team_id = $this->team_model->create($user_unique_id, $this->input->post('name'));
                         if($team_id) {
                             $user->team_id = $team_id;
+                            $user->group_id = 1;
                             $this->user_model->update($user);
                             redirect('/');
                         } else {
