@@ -38,17 +38,16 @@
                         </div>
                     </div>
                 </div>
-                <nav class="mt-9">
+                <a href="<?php echo base_url('ticket/new') ?>" class="btn btn-sm btn-primary mt-8"><i class="fe fe-plus"></i> New Ticket</a>
+                <nav class="mt-8">
                     <ul>
                         <li><a href="<?php echo base_url() ?>">Home</a></li>
-                        <li><a href="<?php echo base_url('ticket/new') ?>">New Ticket</a></li>
-                        <li><a href="<?php echo base_url('ticket/all') ?>">Tickets List</a></li>
+                        <li><a href="<?php echo base_url('ticket/all') ?>">Tickets</a></li>
                         <li><a href="<?php echo base_url('project/all') ?>">Projects</a></li>
-                        <li><a href="<?php echo base_url('status/all') ?>">Statuses</a></li>
-                        <li><a href="<?php echo base_url('user/all') ?>">Users</a></li>
-                        <li><a href="<?php echo base_url('group/all') ?>">Groups</a></li>
                         <li><a href="<?php echo base_url('ticket/query') ?>">Search</a></li>
-<!--                        <li><a href="">Settings</a></li>-->
+                        <?php if ($this->group_model->has_permission('settings', 1)): ?>
+                            <li><a href="<?php echo base_url('settings') ?>">Settings</a></li>
+                        <?php endif ?>
                     </ul>
                 </nav>
             </div>
