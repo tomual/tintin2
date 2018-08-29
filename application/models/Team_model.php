@@ -1,12 +1,14 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Team_model extends CI_Model {
+class Team_model extends CI_Model
+{
 
-    public function create($owner_id, $name) {
+    public function create($owner_id, $name)
+    {
         $data = array(
             'owner_id' => $owner_id,
-            'name' => $name
+            'name' => $name,
         );
         $this->db->insert('teams', $data);
 
@@ -17,37 +19,37 @@ class Team_model extends CI_Model {
                 'status_id' => 1,
                 'team_id' => $team_id,
                 'label' => 'Backlog',
-                'color' => 'purple'
+                'color' => 'purple',
             ),
             array(
                 'status_id' => 2,
                 'team_id' => $team_id,
                 'label' => 'Input',
-                'color' => 'blue'
+                'color' => 'blue',
             ),
             array(
                 'status_id' => 3,
                 'team_id' => $team_id,
                 'label' => 'On Hold',
-                'color' => 'azure'
+                'color' => 'azure',
             ),
             array(
                 'status_id' => 4,
                 'team_id' => $team_id,
                 'label' => 'Working',
-                'color' => 'lime'
+                'color' => 'lime',
             ),
             array(
                 'status_id' => 5,
                 'team_id' => $team_id,
                 'label' => 'Complete',
-                'color' => 'cyan'
+                'color' => 'cyan',
             ),
             array(
                 'status_id' => 6,
                 'team_id' => $team_id,
                 'label' => 'Cancelled',
-                'color' => 'orange'
+                'color' => 'orange',
             ),
         );
 
@@ -73,7 +75,7 @@ class Team_model extends CI_Model {
                 'project' => 1,
                 'settings' => 1,
                 'removed' => 'N',
-            )
+            ),
         );
 
         foreach ($groups as $group) {
@@ -81,5 +83,27 @@ class Team_model extends CI_Model {
         }
 
         return $team_id;
+    }
+
+    public function get($team_id = null)
+    {
+        if (!$team_id) {
+            $team_id = $this->user->team_id;
+        }
+        $this->db->where('id', $team_id);
+        $this->db->from('teams');
+        $group = $this->db->get()->first_row();
+        return $group;
+    }
+
+    public function update($team_id, $name)
+    {
+        $data = array(
+            'name' => $name,
+        );
+        $this->db->set($data);
+        $this->db->where('id', $team_id);
+        $this->db->update('teams');
+        return $this->db->affected_rows();
     }
 }
