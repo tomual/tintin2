@@ -57,6 +57,15 @@ class Team_model extends CI_Model
             $this->db->insert('statuses', $status);
         }
 
+        $settings = array(
+            array(
+                'team_id' => $team_id,
+                'status_start' => 1,
+            )
+        );
+
+        $this->db->insert('settings', $settings);
+
         $groups = array(
             array(
                 'group_id' => 1,

@@ -69,12 +69,9 @@ class Group extends MY_Controller
                 $ticket = $this->input->post('ticket');
                 $project = $this->input->post('project');
                 $settings = $this->input->post('settings');
-                $updated = $this->group_model->update($group_id, $this->user->team_id, $label, $ticket, $project, $settings);
-                if ($updated) {
-                    redirect("group/all");
-                } else {
-                    $this->session->set_flashdata('error', 'There was an unknown error updating your group.');
-                }
+                $this->group_model->update($group_id, $this->user->team_id, $label, $ticket, $project, $settings);
+                $this->session->set_flashdata('success', 'Group has been updated.');
+                redirect("group/all");
             }
         }
         $this->load->view('groups/edit', compact('group'));
