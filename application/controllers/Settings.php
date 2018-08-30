@@ -10,9 +10,8 @@ class Settings extends MY_Controller {
 	}
 
     public function edit() {
-        $this->load->model('settings_model');
         $this->load->model('team_model');
-        $settings = $this->settings_model->get($this->user->team_id);
+        $settings = $this->settings_model->get_all($this->user->team_id);
         $team = $this->team_model->get($this->user->team_id);
 
         if ($this->input->method() == 'post') {

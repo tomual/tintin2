@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Settings_model extends CI_Model
 {
 
-    public function get($team_id = null)
+    public function get_all($team_id = null)
     {
         if (!$team_id) {
             $team_id = $this->user->team_id;
@@ -13,6 +13,17 @@ class Settings_model extends CI_Model
         $this->db->from('settings');
         $group = $this->db->get()->first_row();
         return $group;
+    }
+
+    public function get($key, $team_id = null)
+    {
+        if (!$team_id) {
+            $team_id = $this->user->team_id;
+        }
+        $this->db->where('team_id', $team_id);
+        $this->db->from('settings');
+        $group = $this->db->get()->first_row();
+        return $group->{$key} ?? null;
     }
 
     public function update($team_id, $status_start)

@@ -20,7 +20,7 @@ class Ticket_model extends CI_Model {
             'ticket_id' => $this->get_next_ticket_id($this->user->team_id),
             'title' => $title,
             'description' => $description,
-            'status_id' => 1,
+            'status_id' => $this->settings_model->get('status_start') ?? 1,
             'project_id' => $project_id,
             'created_by' => $this->user->id,
             'team_id' => $this->user->team_id,

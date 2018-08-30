@@ -31,25 +31,29 @@
     <?php if ($this->group_model->has_permission('ticket', 3)): ?>
         <hr>
         <h3>Quick Update</h3>
-        <form method="post" action="<?php echo base_url("ticket/quick/{$ticket->ticket_id}") ?>">
-            <div class="form-group">
-                <label class="form-label" for="">Status</label>
-                <div class="selectgroup w-100">
-                    <?php foreach ($this->statuses as $status): ?>
-                        <label class="selectgroup-item">
-                            <input name="status_id" value="<?php echo $status->status_id ?>" <?php echo $ticket->status_id == $status->status_id ? 'checked' : '' ?> class="selectgroup-input" type="radio">
-                            <span class="selectgroup-button"><?php echo $status->label ?></span>
-                        </label>
-                    <?php endforeach ?>
-                </div>
-            </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <form method="post" action="<?php echo base_url("ticket/quick/{$ticket->ticket_id}") ?>">
+                    <div class="form-group">
+                        <label class="form-label" for="">Status</label>
+                        <div class="selectgroup">
+                            <?php foreach ($this->statuses as $status): ?>
+                                <label class="selectgroup-item">
+                                    <input name="status_id" value="<?php echo $status->status_id ?>" <?php echo $ticket->status_id == $status->status_id ? 'checked' : '' ?> class="selectgroup-input" type="radio">
+                                    <span class="selectgroup-button"><?php echo $status->label ?></span>
+                                </label>
+                            <?php endforeach ?>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <label class="form-label" for="comment">Comment</label>
-                <textarea class="ckeditor ckeditor-small form-control" name="comment" id="comment"></textarea>
+                    <div class="form-group">
+                        <label class="form-label" for="comment">Comment</label>
+                        <textarea class="ckeditor ckeditor-small form-control" name="comment" id="comment"></textarea>
+                    </div>
+                    <input type="submit" value="Update" class="btn btn-primary mt-1">
+                </form>
             </div>
-            <input type="submit" value="Update" class="btn btn-primary mt-1">
-        </form>
+        </div>
     <?php endif ?>
 
     <hr>

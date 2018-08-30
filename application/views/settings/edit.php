@@ -1,5 +1,5 @@
 <?php $this->load->view('header') ?>
-<h1 class="d-inline">Settings</h1>
+<h1>Edit Settings</h1>
 <?php echo alerts() ?>
 <form method="post">
     <div class="form-group">
