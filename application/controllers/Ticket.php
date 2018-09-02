@@ -44,6 +44,17 @@ class Ticket extends MY_Controller
         $this->load->view('tickets/status', compact('tickets', 'status'));
     }
 
+    public function user($user_id)
+    {
+        $data = array(
+            'created_by' => $this->user->id
+        );
+
+        $user = $this->user_model->get($user_id);
+        $tickets = $this->ticket_model->query($this->user->team_id, $data);
+        $this->load->view('tickets/user', compact('tickets', 'user'));
+    }
+
     function new() {
         $this->check_permission('ticket', 2);
         $this->load->helper(array('form', 'url'));
