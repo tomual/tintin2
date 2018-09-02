@@ -17,6 +17,8 @@ class Ticket extends MY_Controller
     {
         $ticket = $this->ticket_model->get($ticket_id, $this->user->team_id);
         $revisions = $this->ticket_model->get_revisions($ticket_id, $this->user->team_id);
+
+        set_title($ticket->title);
         $this->load->view('tickets/view', compact('ticket', 'revisions'));
     }
 
@@ -27,6 +29,8 @@ class Ticket extends MY_Controller
         } else {
             $tickets = $this->ticket_model->get_all($this->user->team_id);
         }
+
+        set_title('All Tickets');
         $this->load->view('tickets/all', compact('tickets'));
     }
 
@@ -34,6 +38,8 @@ class Ticket extends MY_Controller
     {
         $project = $this->project_model->get($project_id);
         $tickets = $this->ticket_model->query($this->user->team_id, compact('project_id'));
+
+        set_title($project->label);
         $this->load->view('tickets/project', compact('tickets', 'project'));
     }
 
@@ -41,6 +47,8 @@ class Ticket extends MY_Controller
     {
         $status = $this->status_model->get($status_id);
         $tickets = $this->ticket_model->query($this->user->team_id, compact('status_id'));
+
+        set_title($status->label);
         $this->load->view('tickets/status', compact('tickets', 'status'));
     }
 
@@ -52,6 +60,8 @@ class Ticket extends MY_Controller
 
         $user = $this->user_model->get($user_id);
         $tickets = $this->ticket_model->query($this->user->team_id, $data);
+
+        set_title($user->first_name . ' ' . $user->last_name);
         $this->load->view('tickets/user', compact('tickets', 'user'));
     }
 
@@ -82,6 +92,8 @@ class Ticket extends MY_Controller
                 }
             }
         }
+
+        set_title('New Ticket');
         $this->load->view('tickets/new');
     }
 
@@ -127,6 +139,8 @@ class Ticket extends MY_Controller
                 }
             }
         }
+
+        set_title('Edit Ticket');
         $this->load->view('tickets/edit', compact('ticket'));
     }
 
@@ -178,6 +192,8 @@ class Ticket extends MY_Controller
     public function query()
     {
         $tickets = $this->ticket_model->query($this->user->team_id, $this->input->get());
+
+        set_title('Search');
         $this->load->view('tickets/query', compact('tickets'));
     }
 

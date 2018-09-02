@@ -10,9 +10,11 @@ class Home extends MY_Controller {
             $new = $this->ticket_model->get_new(5);
             $updated = $this->ticket_model->get_updated(5);
 
+            set_title('Home');
             $this->load->view('home', compact('summary', 'updated', 'new'));
             return;
         }
+
         $this->load->view('promo');
 	}
 
