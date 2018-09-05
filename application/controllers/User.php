@@ -13,7 +13,7 @@ class User extends MY_Controller {
 
     public function index()
 	{
-		$this->load->view('home');
+        $this->login();
 	}
 
     public function signup()
@@ -60,6 +60,7 @@ class User extends MY_Controller {
                 }
             }
         }
+        set_title('Sign Up');
         $this->load->view('users/signup');
     }
 
@@ -85,6 +86,7 @@ class User extends MY_Controller {
                 }
             }
         }
+        set_title('Log In');
         $this->load->view('users/login');
     }
 
@@ -98,6 +100,7 @@ class User extends MY_Controller {
     {
         $groups = $this->group_model->get_all($this->user->team_id);
         $users = $this->user_model->get_all($this->user->team_id);
+        set_title('Users');
         $this->load->view('users/all', compact('users', 'groups'));
     }
 
@@ -131,6 +134,7 @@ class User extends MY_Controller {
             }
         }
         $groups = $this->group_model->get_all($this->user->team_id);
+        set_title('New User');
         $this->load->view('users/new', compact('groups'));
     }
 
@@ -170,6 +174,7 @@ class User extends MY_Controller {
             }
         }
         $groups = $this->group_model->get_all($this->user->team_id);
+        set_title('Edit User');
         $this->load->view('users/edit', compact('user', 'groups'));
     }
 }

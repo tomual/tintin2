@@ -10,18 +10,20 @@ class Status extends MY_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $this->all();
     }
 
     public function view($status_id)
     {
         $status = $this->status_model->get($status_id, $this->user->team_id);
+        set_title($status->label);
         $this->load->view('statuses/view', compact('status'));
     }
 
     public function all()
     {
         $statuses = $this->status_model->get_all($this->user->team_id, true);
+        set_title('Statuses');
         $this->load->view('statuses/all', compact('statuses'));
     }
 
@@ -58,6 +60,7 @@ class Status extends MY_Controller
                 }
             }
         }
+        set_title('New Status');
         $this->load->view('statuses/new', compact('statuses'));
     }
 
@@ -101,6 +104,7 @@ class Status extends MY_Controller
                 }
             }
         }
+        set_title('Edit Status');
         $this->load->view('statuses/edit', compact('status', 'statuses'));
     }
 

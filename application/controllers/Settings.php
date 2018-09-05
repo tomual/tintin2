@@ -6,6 +6,7 @@ class Settings extends MY_Controller {
 	public function index()
 	{
         $this->check_permission('settings', 1);
+        set_title('Settings');
         $this->load->view('settings');
 	}
 
@@ -30,6 +31,7 @@ class Settings extends MY_Controller {
             }
         }
 
+        set_title('General Settings');
         $this->load->view('settings/edit', compact('team', 'settings'));
     }
 }

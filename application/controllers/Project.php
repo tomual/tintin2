@@ -10,18 +10,20 @@ class Project extends MY_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $this->all();
     }
 
     public function view($project_id)
     {
         $project = $this->project_model->get($project_id, $this->user->team_id);
+        set_title($project->label);
         $this->load->view('projects/view', compact('project'));
     }
 
     public function all()
     {
         $projects = $this->project_model->get_all_with_ticket_count($this->user->team_id, true);
+        set_title('Projects');
         $this->load->view('projects/all', compact('projects'));
     }
 
@@ -52,6 +54,7 @@ class Project extends MY_Controller
                 }
             }
         }
+        set_title('New Project');
         $this->load->view('projects/new', compact('projects'));
     }
 
@@ -89,6 +92,7 @@ class Project extends MY_Controller
                 }
             }
         }
+        set_title('Edit Project');
         $this->load->view('projects/edit', compact('project', 'statuses'));
     }
 

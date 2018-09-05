@@ -10,18 +10,20 @@ class Group extends MY_Controller
 
     public function index()
     {
-        $this->load->view('home');
+        $this->all();
     }
 
     public function view($group_id)
     {
         $group = $this->group_model->get($group_id, $this->user->team_id);
+        set_title($group->label);
         $this->load->view('groups/view', compact('group'));
     }
 
     public function all()
     {
         $groups = $this->group_model->get_all($this->user->team_id, true);
+        set_title('Groups');
         $this->load->view('groups/all', compact('groups'));
     }
 
@@ -52,6 +54,7 @@ class Group extends MY_Controller
                 }
             }
         }
+        set_title('New Group');
         $this->load->view('groups/new', compact('groups'));
     }
 
@@ -74,6 +77,7 @@ class Group extends MY_Controller
                 redirect("group/all");
             }
         }
+        set_title('Edit Group');
         $this->load->view('groups/edit', compact('group'));
     }
 
