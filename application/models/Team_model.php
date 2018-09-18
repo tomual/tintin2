@@ -58,10 +58,8 @@ class Team_model extends CI_Model
         }
 
         $settings = array(
-            array(
-                'team_id' => $team_id,
-                'status_start' => 1,
-            )
+            'team_id' => $team_id,
+            'status_start' => 1,
         );
 
         $this->db->insert('settings', $settings);
