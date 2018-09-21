@@ -1,18 +1,4 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.7.19 - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             9.5.0.5196
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping structure for table tintin2.ci_sessions
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
+CREATE TABLE `ci_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
@@ -20,9 +6,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   KEY `ci_sessions_timestamp` (`timestamp`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.groups
-CREATE TABLE IF NOT EXISTS `groups` (
+CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) DEFAULT NULL,
   `team_id` int(11) DEFAULT NULL,
@@ -36,9 +20,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.projects
-CREATE TABLE IF NOT EXISTS `projects` (
+CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
@@ -52,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.revisions
-CREATE TABLE IF NOT EXISTS `revisions` (
+CREATE TABLE `revisions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) NOT NULL DEFAULT '0',
   `team_id` int(11) NOT NULL,
@@ -66,23 +46,20 @@ CREATE TABLE IF NOT EXISTS `revisions` (
   `status_id` int(11) NOT NULL,
   `worker_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.settings
-CREATE TABLE IF NOT EXISTS `settings` (
+CREATE TABLE `settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `team_id` int(11) DEFAULT NULL,
   `status_start` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.statuses
-CREATE TABLE IF NOT EXISTS `statuses` (
+CREATE TABLE `statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
@@ -99,9 +76,7 @@ CREATE TABLE IF NOT EXISTS `statuses` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.teams
-CREATE TABLE IF NOT EXISTS `teams` (
+CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` varchar(50) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL DEFAULT '0',
@@ -109,9 +84,7 @@ CREATE TABLE IF NOT EXISTS `teams` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.tickets
-CREATE TABLE IF NOT EXISTS `tickets` (
+CREATE TABLE `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ticket_id` int(11) NOT NULL,
   `team_id` int(11) NOT NULL,
@@ -128,9 +101,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
--- Dumping structure for table tintin2.users
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `team_id` int(11) NOT NULL,
@@ -143,8 +114,3 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
