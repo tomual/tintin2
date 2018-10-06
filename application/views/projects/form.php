@@ -2,7 +2,7 @@
 <form method="post">
     <div class="form-group">
         <label class="form-label" for="label">Label</label>
-        <input type="text" class="form-control <?php if(form_error('label')) echo 'is-invalid' ?>" name="label" id="label" value="<?php echo set_value('label', null) ?? $project->label ?? null ?>">
+        <input type="text" class="form-control <?php if(form_error('label')) echo 'is-invalid' ?>" name="label" id="label" value="<?php echo set_value('label', null) ?? $project->label ?? null ?>" autofocus>
         <?php echo form_error('label') ?>
     </div>
 

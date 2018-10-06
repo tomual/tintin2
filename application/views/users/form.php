@@ -2,7 +2,7 @@
 <form method="post" class="form-signup">
     <div class="form-group">
         <label class="form-label" for="email">Email</label>
-        <input type="text" class="form-control <?php if(form_error('email')) echo 'is-invalid' ?>" name="email" id="email" value="<?php echo set_value('email', $user->email ?? null) ?>">
+        <input type="text" class="form-control <?php if(form_error('email')) echo 'is-invalid' ?>" name="email" id="email" value="<?php echo set_value('email', $user->email ?? null) ?>" autofocus>
         <?php echo form_error('email') ?>
     </div>
 

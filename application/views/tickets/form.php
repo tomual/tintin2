@@ -2,7 +2,7 @@
 <form method="post">
     <div class="form-group">
         <label class="form-label" for="title">Title</label>
-        <input type="text" class="form-control  <?php if (form_error('title')) echo 'is-invalid' ?>" name="title" id="title" value="<?php echo set_value('title', null) ?? $ticket->title ?? null ?>">
+        <input type="text" class="form-control <?php if (form_error('title')) echo 'is-invalid' ?>" name="title" id="title" value="<?php echo set_value('title', null) ?? $ticket->title ?? null ?>" autofocus>
         <?php echo form_error('title') ?>
     </div>
 
