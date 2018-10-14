@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label class="form-label" for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password" value="<?php echo set_value('password') ?>">
+        <input type="password" class="form-control" name="password" id="password">
         <?php echo form_error('password') ?>
     </div>
     <input type="submit" value="Log in" class="btn btn-primary">

@@ -66,22 +66,15 @@ var s;
     var urlViewTicket = '<?php echo base_url('ticket/view/') ?>';
     var urlNewTicket = '<?php echo base_url('ticket/new/') ?>';
     var urlTicketList = '<?php echo base_url('ticket/all/') ?>';
+
     var keyPressed = {};
     document.addEventListener('keydown', function (e) {
-
-        keyPressed[e.key + e.location] = true;
-
-        if (keyPressed.Shift1 == true && keyPressed.Control1 == true) {
-            // Left shift+CONTROL pressed!
-            keyPressed = {}; // reset key map
+        if (!$('input:focus').length) {
+            keyPressed[e.key + e.location] = true;
+            checkShortcut();
         }
-        if (keyPressed.Shift2 == true && keyPressed.Control2 == true) {
-            // Right shift+CONTROL pressed!
-            keyPressed = {};
-        }
-
-        checkShortcut();
     }, false);
+
     document.addEventListener('keyup', function (e) {
         $('.shortcuts-overlay').fadeOut('fast');
         $('.shortcuts-dim').fadeOut();
