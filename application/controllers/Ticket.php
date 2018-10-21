@@ -164,10 +164,8 @@ class Ticket extends MY_Controller
                     'comment' => $this->input->post('comment'),
                 );
                 $has_difference = false;
-                foreach ($data as $key => $value) {
-                    if ($data[$key] != $ticket->{$key}) {
-                        $has_difference = true;
-                    }
+                if ($data['status_id'] != $ticket->status_id) {
+                    $has_difference = true;
                 }
                 if ($has_difference || $data['comment']) {
                     if ($has_difference && !$this->is_author($ticket->created_by, $this->user->id)) {
