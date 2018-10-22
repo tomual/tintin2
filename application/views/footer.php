@@ -73,6 +73,9 @@ var s;
             keyPressed[e.key + e.location] = true;
             checkShortcut();
         }
+        if (e.key == "Escape" && searchIsOpen()) {
+            closeSearch();
+        }
     }, false);
 
     document.addEventListener('keyup', function (e) {
