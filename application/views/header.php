@@ -9,6 +9,7 @@
 
     <meta name="author" content="tomual">
 
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url('favicon.ico') ?>"/>
     <link href="https://tabler.github.io/tabler/assets/css/dashboard.css" rel="stylesheet"/>
     <link rel="stylesheet" href="//dbrekalo.github.io/simpleLightbox/dist/simpleLightbox.min.css">
     <link href="<?php echo base_url('css/tabler.css') ?>" rel="stylesheet">
