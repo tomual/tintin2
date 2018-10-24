@@ -33,7 +33,7 @@ class Ticket_model extends CI_Model {
     {
         $revision = (array) $this->get($ticket_id, $team_id);
 
-        if($data['status_id'] == 5 && $revision['status_id'] != 4) {
+        if($data['status_id'] == 5 && ($revision['status_id'] != 4 && $revision['status_id'] != 5)) {
             $data['status_id'] = 4;
             $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
             $data['status_id'] = 5;
@@ -45,22 +45,21 @@ class Ticket_model extends CI_Model {
             $data['worker_id'] = null;
         }
 
-        if($data['status_id'] == 5 && $revision['status_id'] != 4) {
-            $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
-        }
-
         $revision['comment'] = $data['comment'];
         unset($data['comment']);
 
-        $data['updated_by'] = $this->user->id;
+        $data['created_by'] = $this->user->id;
 
         $this->db->set($data);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->where('team_id', $team_id);
         $this->db->update('tickets');
         if($this->db->affected_rows() || $revision['comment']) {
-            $revision['updated_by'] = $this->user->id;
+            $revision['created_by'] = $this->user->id;
             unset($revision['id']);
+            unset($revision['created_at']);
+            unset($revision['updated_at']);
+            unset($revision['updated_by']);
             $this->db->insert('revisions', $revision);
             return $this->db->insert_id();
         }
@@ -131,7 +130,7 @@ class Ticket_model extends CI_Model {
         $this->db->where('team_id', $team_id);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->from('revisions');
-        $this->db->order_by('updated_at', 'desc');
+        $this->db->order_by('created_at', 'desc');
         $revisions = $this->db->get()->result();
         return $revisions;
     }

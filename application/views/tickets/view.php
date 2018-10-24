@@ -64,12 +64,12 @@
     <?php endif ?>
     <?php
     $cursor = $ticket;
-    $ignore = array('id', 'comment', 'updated_at', 'updated_by');
+    $ignore = array('id', 'comment', 'created_at', 'created_by');
     foreach ($revisions as $revision) {
         echo "<div class=\"card card-revision\">
         <div class=\"card-body\">
-            <small class=\"float-right text-muted\">" . date('M j, Y g:ia', strtotime($revision->updated_at)) . "</small>
-            <b class=\"m-0\">" . get_user_first_name($revision->updated_by) . "</b>";
+            <small class=\"float-right text-muted\">" . date('M j, Y g:ia', strtotime($revision->created_at)) . "</small>
+            <b class=\"m-0\">" . get_user_first_name($revision->created_by) . "</b>";
         foreach ($revision as $key => $value) {
             if (!in_array($key, $ignore) && $revision->{$key} != $cursor->{$key}) {
                 switch ($key) {
