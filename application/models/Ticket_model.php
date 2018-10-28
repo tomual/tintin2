@@ -34,15 +34,17 @@ class Ticket_model extends CI_Model {
         $revision = (array) $this->get($ticket_id, $team_id);
 
         if($data['status_id'] == 5 && ($revision['status_id'] != 4 && $revision['status_id'] != 5)) {
+            $comment = $data['comment'];
+            unset($data['comment']);
             $data['status_id'] = 4;
             $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
+            $revision = (array) $this->get($ticket_id, $team_id);
             $data['status_id'] = 5;
+            $data['comment'] = $comment;
         }
 
         if($data['status_id'] == 4) {
             $data['worker_id'] = $this->user->id;
-        } elseif($data['status_id'] != 5) {
-            $data['worker_id'] = null;
         }
 
         $revision['comment'] = $data['comment'];
