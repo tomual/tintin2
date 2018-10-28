@@ -35,7 +35,7 @@ class Ticket_model extends CI_Model {
 
         if($data['status_id'] == 5 && ($revision['status_id'] != 4 && $revision['status_id'] != 5)) {
             $comment = $data['comment'];
-            unset($data['comment']);
+            $data['comment'] = '';
             $data['status_id'] = 4;
             $this->ticket_model->update($ticket_id, $this->user->team_id, $data);
             $revision = (array) $this->get($ticket_id, $team_id);
@@ -132,7 +132,7 @@ class Ticket_model extends CI_Model {
         $this->db->where('team_id', $team_id);
         $this->db->where('ticket_id', $ticket_id);
         $this->db->from('revisions');
-        $this->db->order_by('created_at', 'desc');
+        $this->db->order_by('id', 'desc');
         $revisions = $this->db->get()->result();
         return $revisions;
     }
