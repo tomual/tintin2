@@ -10,9 +10,10 @@ function console_log( $data ){
     echo '</script>';
 }
 
-function plsdie( $data ){
+function dd( $data ){
     echo '<pre>';
     print_r($data);
+    echo '</pre>';
     die();
 }
 

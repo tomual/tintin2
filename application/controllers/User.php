@@ -12,21 +12,21 @@ class User extends MY_Controller {
     }
 
     public function index()
-	{
+    {
         $this->login();
-	}
+    }
 
     public function signup()
     {
         if($this->input->method() == 'post') {
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('name', 'team Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-            $this->form_validation->set_rules('first_name', 'First Name', 'required');
-            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
-            $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|matches[password]');
+            $this->form_validation->set_rules('name', 'Team Name', 'required|trim|strip_tags');
+            $this->form_validation->set_rules('email', 'Email', 'required|trim|strip_tags|valid_email|is_unique[users.email]');
+            $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|strip_tags');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|strip_tags');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|min_length[6]|matches[password]');
 
             if ($this->form_validation->run() !== FALSE)
             {
@@ -58,6 +58,8 @@ class User extends MY_Controller {
                 } else {
                     $this->session->set_flashdata('error', 'There was an unknown issue signing you up.');
                 }
+            } else {
+                $this->session->set_flashdata('error', 'Please fill in all fields with valid information.');
             }
         }
         set_title('Sign Up');
